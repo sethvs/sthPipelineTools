@@ -1,24 +1,27 @@
 # sthPipelineTools
 
-**sthPipelineTools** - it is a module containing two functions for working with and exploring PowerShell pipeline.
+**sthPipelineTools** - это модуль, содержащий две функции, предназначенные для работы и исследования механизма конвейера в PowerShell.
 
-It contains following functions:
+В модуль входят следующие функции:
 
-**Get-sthPipelineCommand** - Function checks, whether a specified command supports pipelining.
+**Get-sthPipelineCommand** - Функция проверяет, поддерживает ли указанная команда получение данных по конвейеру.
 
-**Get-sthPipelineParameter** - Function discovers parameters of the specified command, that accept pipeline input and displays their Names, Types, Parameter Sets, whether it is a default Parameter Set, whether it is a Mandatory parameter as well as supported methods of accepting pipeline input - ByValue and ByPropertyName.
+**Get-sthPipelineParameter** - Функция Get-sthPipelineParameters выводит информацию о параметрах указанной команды, которые поддерживают получение данных по конвейеру.
 
-You can install sthPipelineTools module from PowerShell Gallery:
+Результаты содержат имена параметров, их типы, набор параметров, в который они входят, является ли он набором параметров по умолчанию, является ли параметр обязательным (Mandatory), а также, какие из способов сопоставления поступающих данных - ByValue, ByPropertyName - он поддерживает.
+
+Вы можете установить модуль sthPipelineTools из PowerShell Gallery:
+
 
 ```
 Install-Module sthPipelineTools
 ```
 
-## How to use it?
+## Как с этим работать?
 
 ### Get-sthPipelineCommand
 
-This command checks, whether Get-Process cmdlet supports pipelining.
+Команда проверяет, поддерживает ли командлет Get-Process получение данных по конвейеру.
 
 ```powershell
 Get-sthPipelineCommand -Command Get-Process
@@ -30,7 +33,7 @@ Get-Process             True
 
 ---
 
-This command checks, whether Get-Verb function supports pipelining.
+Команда проверяет, поллерживает ли функция Get-Verb получение данных по конвейеру.
 
 ```powershell
 Get-sthPipelineCommand -Command Get-Verb
@@ -42,9 +45,9 @@ Get-Verb             True
 
 ---
 
-Command checks, whether Get-Service cmdlet supports pipelining. 
+Команда проверяет, поддерживает ли командлет Get-Service получение данных по конвейеру. 
 
-We used its alias 'gsv' as a parameter value.
+При запросе используется его псевдоним - "gsv".
 
 ```powershell
 Get-sthPipelineCommand -Command gsv
@@ -56,13 +59,13 @@ Get-Service             True
 
 ---
 
-The first command gets [CmdletInfo] object for Get-Process cmdlet.
+Первая команда получает объект [CmdletInfo], описывающий командлет Get-Process.
 
-The second command gets [FunctionInfo] object for Get-Verb function.
+Вторая команда получает объект [FunctionInfo], описывающий функцию Get-Verb.
 
-The third command gets [AliasInfo] object for gsv alias.
+Третья команда получает объект [AliasInfo], описывающий псевдоним "gsv".
 
-The fourth command checks, whether these commands support pipelining.
+Четвертая команда проверяет, поддерживают ли эти команды получение данных по конвейеру.
 
 ```powershell
 $command = Get-Command -Name Get-Process
@@ -80,15 +83,15 @@ Get-Service             True
 
 ---
 
-The first command gets [CmdletInfo] object for Get-Process cmdlet.
+Первая команда получает объект [CmdletInfo], описывающий командлет Get-Process.
 
-The second command gets [FunctionInfo] object for Get-Verb function.
+Вторая команда получает объект [FunctionInfo], описывающий функцию Get-Verb.
 
-The third command gets [AliasInfo] object for gsv alias.
+Третья команда получает объект [AliasInfo], описывающий псевдоним "gsv".
 
-The fourth command checks, whether these commands and Get-PSDrive and Get-Content (we used its alias - 'cat') support pipelining.
+Четвертая команда проверяет, поддерживают ли эти команды, а также Get-PSDrive и Get-Content (мы использовали его псевдоним - 'cat'), получение данных по конвейеру.
 
-This time we provide commands to Get-sthPipelineCommand using pipeline.
+В этот раз мы передали данные функции Get-sthPipelineCommand при помощи конвейера.
 
 ```powershell
 $command = Get-Command -Name Get-Process
@@ -108,9 +111,9 @@ Get-Content             True
 
 ---
 
-The first command gets array of cmdlets, that are members of 'Microsoft.PowerShell.Management' module.
+Первая комада получает массив команд, входящих в модуль 'Microsoft.PowerShell.Management'.
 
-The second command displays whether these commands support pipelining.
+Вторая команда проверяет, поддерживают ли они получение данных по конвейеру.
 
 ```powershell
 $commands = Get-Command -Module 'Microsoft.PowerShell.Management'
@@ -119,9 +122,9 @@ Get-sthPipelineCommand -Command $commands
 
 ---
 
-This command checks if two commands support pipeline - Get-Process and some nonexisting command.
+Команда проверяет, поддерживает ли командлет Get-Process получение данных по конвейеру.
 
-Result displays information about Get-Process cmdlet and also shows that Non-ExistingCommand was not found.
+Результат содержит информацию о Get-Process, а также сообщает о том, что команда Non-ExistingCommand не была найдена.
 
 ```powershell
 Get-sthPipelineCommand -Command Get-Process, Non-ExistingCommand
@@ -136,9 +139,9 @@ Non-ExistingCommand
 
 ---
 
-This command checks if two commands support pipeline - Get-Process and some nonexisting command.
+Команда проверяет, поддерживает ли командлет Get-Process получение данных по конвейеру.
 
-Because -HideNotFoundCommands switch parameter was used, Get-sthPipelineCommand doesn't show information about non-existing command.
+Так как мы указали параметр -HideNotFoundCommands, функция не будет сообщать о несуществующей команде.
 
 ```powershell
 Get-sthPipelineCommand -Command Get-Process, Non-ExistingCommand -HideNotFoundCommands
@@ -150,7 +153,7 @@ Get-Process             True
 
 ### Get-sthPipelineParameter
 
-This command displays information about parameters of Get-Process cmdlet, that can accept pipeline input.
+Команда отображает информацию о параметрах командлета Get-Process, которые поддерживают получение данных по конвейеру.
 
 ```powershell
 Get-sthPipelineParameter -Command Get-Process
@@ -172,7 +175,7 @@ ComputerName  System.String[]              InputObject             False     Fal
 
 ---
 
-This command displays information about parameters of Get-Verb function, that can accept pipeline input.
+Команда отображает информацию о параметрах функции Get-Verb, которые поддерживают получение данных по конвейеру.
 
 ```powershell
 Get-sthPipelineParameter -Command Get-Verb
@@ -186,9 +189,9 @@ verb          System.String[] __AllParameterSets False     True    False
 
 ---
 
-Command displays information about parameters of Get-Service cmdlet, that can accept pipeline input.
+Команда отображает информацию о параметрах командлета Get-Service, которые поддерживают получение данных по конвейеру. 
 
-We used its alias 'gsv' as a parameter value.
+При запросе используется его псевдоним - "gsv".
 
 ```powershell
 Get-sthPipelineParameter -Command gsv
@@ -204,13 +207,13 @@ InputObject   System.ServiceProcess.ServiceController[] InputObject         Fals
 
 ---
 
-The first command gets [CmdletInfo] object for Get-Process cmdlet.
+Первая команда получает объект [CmdletInfo], описывающий командлет Get-Process.
 
-The second command gets [FunctionInfo] object for Get-Verb function.
+Вторая команда получает объект [FunctionInfo], описывающий функцию Get-Verb.
 
-The third command gets [AliasInfo] object for gsv alias.
+Третья команда получает объект [AliasInfo], описывающий псевдоним "gsv".
 
-The fourth command displays information about parameters of specified cmdlets and functions, that support pipeline input.
+Четвертая команда отображает информацию о параметрах указанных командлетов и функций, которые поддерживают получение данных по конвейеру.
 
 ```powershell
 $command = Get-Command -Name Get-Process
@@ -222,15 +225,15 @@ Get-sthPipelineParameter -Command $command, $function, $alias
 
 ---
 
-The first command gets [CmdletInfo] object for Get-Process cmdlet.
+Первая команда получает объект [CmdletInfo], описывающий командлет Get-Process.
 
-The second command gets [FunctionInfo] object for Get-Verb function.
+Вторая команда получает объект [FunctionInfo], описывающий функцию Get-Verb.
 
-The third command gets [AliasInfo] object for gsv alias.
+Третья команда получает объект [AliasInfo], описывающий псевдоним "gsv".
 
-The fourth command displays information about parameters of specified cmdlets and functions, that support pipeline input.
+Четвертая команда отображает информацию о параметрах указанных командлетов и функций, которые поддерживают получение данных по конвейеру.
 
-This time we provide commands to Get-sthPipelineParameter using pipeline.
+В этот раз мы передали данные функции Get-sthPipelineParameter при помощи конвейера.
 
 ```powershell
 $command = Get-Command -Name Get-Process
@@ -242,9 +245,9 @@ $command, $function, $alias, 'Get-PSDrive', 'cat' | Get-sthPipelineParameter
 
 ---
 
-This command displays information about parameters of Get-Process cmdlet, that can accept pipeline input.
+Команда отображает информацию о параметрах командлета Get-Process, которые поддерживают получение данных по конвейеру.
 
-Also, output contains information about non-existing command.
+Также функция сообщает о несуществующей команде - "Non-ExistingCommand".
 
 ```powershell
 Get-sthPipelineParameter -Command Get-Process, Non-ExistingCommand
@@ -269,10 +272,9 @@ Non-ExistingCommand
 
 ---
 
-This command displays information about parameters of Get-Process cmdlet, that can accept pipeline input.
+Команда отображает информацию о параметрах командлета Get-Process, которые поддерживают получение данных по конвейеру.
 
-Because -HideNotFoundCommands switch parameter was used, Get-sthPipelineParameter 
-doesn't show information about non-existing command.
+Так как мы указали параметр -HideNotFoundCommands, функция не будет сообщать о несуществующей команде.
 
 ```powershell
 Get-sthPipelineParameter -Command Get-Process, Non-ExistingCommand -HideNotFoundCommands
@@ -294,11 +296,14 @@ ComputerName  System.String[]              InputObject             False     Fal
 
 ---
 
-Function Get-sthPipelineCommand gets information about whether Get-Process, Start-Process and Stop-Process cmdlets support pipelining.
+Функция Get-sthPipelineCommand проверяет, поддерживают ли командлеты 
+Get-Process, Start-Process и Stop-Process получение данных по конвейеру.
 
-Then it sends results to Get-sthPipelineParameter function, which returns information about parameters, that can accept objects from pipeline.
+Затем функция передает полученные данные функции Get-sthPipelineParameter, 
+которая выводит информацию о поддерживающих конвейер параметрах.
 
-Of these three commands, only two - Get-Process and Stop-Process - support pipelining, therefore Get-sthPipelineParameter results don't contain information about Start-Process.
+Так как из трех указанных команд конвейер поддерживают только две - Get-Process and Stop-Process, 
+функция Get-sthPipelineParameter не отображает информацию о паарметрах командлета Start-Process.
 
 ```powershell
 Get-sthPipelineCommand -Command Get-Process, Start-Process, Stop-Process | Get-sthPipelineParameter
