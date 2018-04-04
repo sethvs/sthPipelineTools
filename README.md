@@ -4,9 +4,9 @@
 
 It contains following functions:
 
-**Get-sthPipelineCommand** - Function checks, whether a specified command supports pipelining.
+[**Get-sthPipelineCommand**](#get-sthpipelinecommand) - Function checks, whether a specified command supports pipelining.
 
-**Get-sthPipelineParameter** - Function discovers parameters of the specified command, that accept pipeline input and displays their Names, Types, Parameter Sets, whether it is a default Parameter Set, whether it is a Mandatory parameter as well as supported methods of accepting pipeline input - ByValue and ByPropertyName.
+[**Get-sthPipelineParameter**](#get-sthpipelineparameter) - Function discovers parameters of the specified command, that accept pipeline input and displays their Names, Types, Parameter Sets, whether it is a default Parameter Set, whether it is a Mandatory parameter as well as supported methods of accepting pipeline input - ByValue and ByPropertyName.
 
 You can install sthPipelineTools module from PowerShell Gallery:
 
@@ -20,7 +20,7 @@ Install-Module sthPipelineTools
 
 This command checks, whether Get-Process cmdlet supports pipelining.
 
-```powershell
+```
 Get-sthPipelineCommand -Command Get-Process
 
 Command     SupportsPipeline
@@ -32,7 +32,7 @@ Get-Process             True
 
 This command checks, whether Get-Verb function supports pipelining.
 
-```powershell
+```
 Get-sthPipelineCommand -Command Get-Verb
 
 Command  SupportsPipeline
@@ -46,7 +46,7 @@ Command checks, whether Get-Service cmdlet supports pipelining.
 
 We used its alias 'gsv' as a parameter value.
 
-```powershell
+```
 Get-sthPipelineCommand -Command gsv
 
 Command     SupportsPipeline
@@ -64,7 +64,7 @@ The third command gets [AliasInfo] object for gsv alias.
 
 The fourth command checks, whether these commands support pipelining.
 
-```powershell
+```
 $command = Get-Command -Name Get-Process
 $function = Get-Command -Name Get-Verb
 $alias = Get-Command gsv
@@ -90,7 +90,7 @@ The fourth command checks, whether these commands and Get-PSDrive and Get-Conten
 
 This time we provide commands to Get-sthPipelineCommand using pipeline.
 
-```powershell
+```
 $command = Get-Command -Name Get-Process
 $function = Get-Command -Name Get-Verb
 $alias = Get-Command gsv
@@ -112,7 +112,7 @@ The first command gets array of cmdlets, that are members of 'Microsoft.PowerShe
 
 The second command displays whether these commands support pipelining.
 
-```powershell
+```
 $commands = Get-Command -Module 'Microsoft.PowerShell.Management'
 Get-sthPipelineCommand -Command $commands
 ```
@@ -123,7 +123,7 @@ This command checks if two commands support pipeline - Get-Process and some none
 
 Result displays information about Get-Process cmdlet and also shows that Non-ExistingCommand was not found.
 
-```powershell
+```
 Get-sthPipelineCommand -Command Get-Process, Non-ExistingCommand
 
 Command     SupportsPipeline
@@ -140,7 +140,7 @@ This command checks if two commands support pipeline - Get-Process and some none
 
 Because -HideNotFoundCommands switch parameter was used, Get-sthPipelineCommand doesn't show information about non-existing command.
 
-```powershell
+```
 Get-sthPipelineCommand -Command Get-Process, Non-ExistingCommand -HideNotFoundCommands
 
 Command     SupportsPipeline
@@ -152,7 +152,7 @@ Get-Process             True
 
 This command displays information about parameters of Get-Process cmdlet, that can accept pipeline input.
 
-```powershell
+```
 Get-sthPipelineParameter -Command Get-Process
 
    Command: Get-Process
@@ -174,7 +174,7 @@ ComputerName  System.String[]              InputObject             False     Fal
 
 This command displays information about parameters of Get-Verb function, that can accept pipeline input.
 
-```powershell
+```
 Get-sthPipelineParameter -Command Get-Verb
 
    Command: Get-Verb
@@ -190,7 +190,7 @@ Command displays information about parameters of Get-Service cmdlet, that can ac
 
 We used its alias 'gsv' as a parameter value.
 
-```powershell
+```
 Get-sthPipelineParameter -Command gsv
 
    Command: Get-Service
@@ -212,7 +212,7 @@ The third command gets [AliasInfo] object for gsv alias.
 
 The fourth command displays information about parameters of specified cmdlets and functions, that support pipeline input.
 
-```powershell
+```
 $command = Get-Command -Name Get-Process
 $function = Get-Command -Name Get-Verb
 $alias = Get-Command gsv
@@ -232,7 +232,7 @@ The fourth command displays information about parameters of specified cmdlets an
 
 This time we provide commands to Get-sthPipelineParameter using pipeline.
 
-```powershell
+```
 $command = Get-Command -Name Get-Process
 $function = Get-Command -Name Get-Verb
 $alias = Get-Command gsv
@@ -246,7 +246,7 @@ This command displays information about parameters of Get-Process cmdlet, that c
 
 Also, output contains information about non-existing command.
 
-```powershell
+```
 Get-sthPipelineParameter -Command Get-Process, Non-ExistingCommand
 
    Command: Get-Process
@@ -274,7 +274,7 @@ This command displays information about parameters of Get-Process cmdlet, that c
 Because -HideNotFoundCommands switch parameter was used, Get-sthPipelineParameter 
 doesn't show information about non-existing command.
 
-```powershell
+```
 Get-sthPipelineParameter -Command Get-Process, Non-ExistingCommand -HideNotFoundCommands
 
    Command: Get-Process
@@ -300,7 +300,7 @@ Then it sends results to Get-sthPipelineParameter function, which returns inform
 
 Of these three commands, only two - Get-Process and Stop-Process - support pipelining, therefore Get-sthPipelineParameter results don't contain information about Start-Process.
 
-```powershell
+```
 Get-sthPipelineCommand -Command Get-Process, Start-Process, Stop-Process | Get-sthPipelineParameter
 
    Command: Get-Process
