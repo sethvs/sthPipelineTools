@@ -302,8 +302,8 @@ Get-Process, Start-Process и Stop-Process получение данных по 
 Затем функция передает полученные данные функции Get-sthPipelineParameter, 
 которая выводит информацию о поддерживающих конвейер параметрах.
 
-Так как из трех указанных команд конвейер поддерживают только две - Get-Process and Stop-Process, 
-функция Get-sthPipelineParameter не отображает информацию о паарметрах командлета Start-Process.
+Так как из трех указанных команд конвейер поддерживают только две - Get-Process и Stop-Process, 
+функция Get-sthPipelineParameter не отображает информацию о параметрах командлета Start-Process.
 
 ```
 Get-sthPipelineCommand -Command Get-Process, Start-Process, Stop-Process | Get-sthPipelineParameter
