@@ -112,7 +112,7 @@ Command  SupportsPipeline
 Get-Verb             True</dev:code>
                 <dev:remarks>
                     <maml:para/>
-                    <maml:para>Команда проверяет, поллерживает ли функция Get-Verb получение данных по конвейеру.</maml:para>
+                    <maml:para>Команда проверяет, поддерживает ли функция Get-Verb получение данных по конвейеру.</maml:para>
                     <maml:para/>
                                         <maml:para/>
                 </dev:remarks>
