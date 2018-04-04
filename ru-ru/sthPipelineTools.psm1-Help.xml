@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml">
+    <command:command 
+        xmlns:maml="http://schemas.microsoft.com/maml/2004/10" 
+        xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" 
+        xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" 
+        xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+        <command:details>
+            <command:name>Get-sthPipelineCommand</command:name>
+            <command:verb>Get</command:verb>
+            <command:noun>sthPipelineCommand</command:noun>
+            <maml:description>
+                <maml:para>Функция проверяет, поддерживает ли команда конвейерную обработку данных.</maml:para>
+            </maml:description>
+        </command:details>
+        <maml:description>
+            <maml:para>Функция Get-sthPipelineCommand проверяет, поддерживает ли указанная команда получение данных по конвейеру.</maml:para>
+        </maml:description>
+        <command:syntax>
+            <command:syntaxItem>
+                <maml:name>Get-sthPipelineCommand</maml:name>
+
+
+                <command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByValue)" position="0" aliases="none">
+                    <maml:name>Command</maml:name>
+                    <maml:Description>
+                    <maml:para>Используется для указания одной или нескольких команд.
+
+Это может быть как имя командлета, функции или псевдонима, так и любой объект, 
+тип которого основывается на System.Management.Automation.CommandInfo, 
+к примеру, такой, как CmdletInfo, FunctionInfo или AliasInfo.</maml:para>
+                    </maml:Description>
+                    <command:parameterValue required="true" variableLength="false">System.Object[]</command:parameterValue>
+                    <dev:type>
+                        <maml:name>System.Object[]</maml:name>
+                        <maml:uri />
+                    </dev:type>
+                    <dev:defaultValue>None</dev:defaultValue>
+                </command:parameter>
+
+
+                <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+                    <maml:name>HideNotFoundCommands</maml:name>
+                    <maml:Description>
+                        <maml:para>Укажите этот параметр, когда вывод информации о ненайденных командах не требуется.</maml:para>
+                    </maml:Description>
+                    <dev:type>
+                        <maml:name>SwitchParameter</maml:name>
+                        <maml:uri />
+                    </dev:type>
+                    <dev:defaultValue>False</dev:defaultValue>
+                </command:parameter>
+            </command:syntaxItem>
+        </command:syntax>
+
+
+        <command:parameters>
+            <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
+                <maml:name>Command</maml:name>
+                <maml:Description>
+                    <maml:para>Используется для указания одной или нескольких команд.
+
+Это может быть как имя командлета, функции или псевдонима, так и любой объект, 
+тип которого основывается на System.Management.Automation.CommandInfo, 
+к примеру, такой, как CmdletInfo, FunctionInfo или AliasInfo.</maml:para>
+                </maml:Description>
+                <command:parameterValue required="true" variableLength="false">System.Object[]</command:parameterValue>
+                <dev:type>
+                    <maml:name>System.Object[]</maml:name>
+                    <maml:uri />
+                </dev:type>
+                <dev:defaultValue>None</dev:defaultValue>
+            </command:parameter>
+
+
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+                <maml:name>HideNotFoundCommands</maml:name>
+                <maml:Description>
+                    <maml:para>Укажите этот параметр, когда вывод информации о ненайденных командах не требуется.</maml:para>
+                </maml:Description>
+                <dev:type>
+                    <maml:name>SwitchParameter</maml:name>
+                    <maml:uri />
+                </dev:type>
+                <dev:defaultValue>False</dev:defaultValue>
+            </command:parameter>
+        </command:parameters>
+
+
+        <command:examples>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineCommand -Command Get-Process
+
+Command     SupportsPipeline
+-------     ----------------
+Get-Process             True
+                </dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Команда проверяет, поддерживает ли командлет Get-Process получение данных по конвейеру.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineCommand -Command Get-Verb
+
+Command  SupportsPipeline
+-------  ----------------
+Get-Verb             True</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Команда проверяет, поллерживает ли функция Get-Verb получение данных по конвейеру.</maml:para>
+                    <maml:para/>
+                                        <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineCommand -Command gsv
+
+Command     SupportsPipeline
+-------     ----------------
+Get-Service             True</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Команда проверяет, поддерживает ли командлет Get-Service получение данных по конвейеру. 
+При запросе используется его псевдоним - "gsv".</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+                <dev:code>$command = Get-Command -Name Get-Process
+$function = Get-Command -Name Get-Verb
+$alias = Get-Command gsv
+
+Get-sthPipelineCommand -Command $command, $function, $alias
+
+Command     SupportsPipeline
+-------     ----------------
+Get-Process             True
+Get-Verb                True
+Get-Service             True
+</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Первая команда получает объект [CmdletInfo], описывающий командлет Get-Process.
+
+Вторая команда получает объект [FunctionInfo], описывающий функцию Get-Verb.
+
+Третья команда получает объект [AliasInfo], описывающий псевдоним "gsv".
+
+Четвертая команда проверяет, поддерживают ли эти команды получение данных по конвейеру.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+                <dev:code>$command = Get-Command -Name Get-Process
+$function = Get-Command -Name Get-Verb
+$alias = Get-Command gsv
+
+$command, $function, $alias, 'Get-PSDrive', 'cat' | Get-sthPipelineCommand
+
+Command     SupportsPipeline
+-------     ----------------
+Get-Process             True
+Get-Verb                True
+Get-Service             True
+Get-PSDrive             True
+Get-Content             True
+</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Первая команда получает объект [CmdletInfo], описывающий командлет Get-Process.
+
+Вторая команда получает объект [FunctionInfo], описывающий функцию Get-Verb.
+
+Третья команда получает объект [AliasInfo], описывающий псевдоним "gsv".
+
+Четвертая команда проверяет, поддерживают ли эти команды, а также Get-PSDrive и Get-Content 
+(мы использовали его псевдоним - 'cat'), получение данных по конвейеру.
+
+В этот раз мы передали данные функции Get-sthPipelineCommand при помощи конвейера.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
+                <dev:code>$commands = Get-Command -Module 'Microsoft.PowerShell.Management'
+Get-sthPipelineCommand -Command $commands
+</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Первая комада получает массив команд, входящих в модуль 'Microsoft.PowerShell.Management'.
+
+Вторая команда проверяет, поддерживают ли они получение данных по конвейеру.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineCommand -Command Get-Process, Non-ExistingCommand
+
+Command     SupportsPipeline
+-------     ----------------
+Get-Process             True
+
+Commands not found:
+Non-ExistingCommand</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Команда проверяет, поддерживает ли командлет Get-Process получение данных по конвейеру.
+
+Результат содержит информацию о Get-Process, а также сообщает о том, что команда Non-ExistingCommand не была найдена.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 8 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineCommand -Command Get-Process, Non-ExistingCommand -HideNotFoundCommands
+
+Command     SupportsPipeline
+-------     ----------------
+Get-Process             True</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Команда проверяет, поддерживает ли командлет Get-Process получение данных по конвейеру.
+
+Так как мы указали параметр -HideNotFoundCommands, функция не будет сообщать о несуществующей команде.</maml:para>
+                </dev:remarks>
+            </command:example>
+        </command:examples>
+    </command:command>
+
+
+
+
+
+
+
+
+
+
+
+    <command:command 
+        xmlns:maml="http://schemas.microsoft.com/maml/2004/10" 
+        xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" 
+        xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" 
+        xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+        <command:details>
+            <command:name>Get-sthPipelineParameter</command:name>
+            <command:verb>Get</command:verb>
+            <command:noun>sthPipelineParameter</command:noun>
+            <maml:description>
+                <maml:para>Функция выводит информацию о параметрах, поддерживающих получение данных по конвейеру.</maml:para>
+            </maml:description>
+        </command:details>
+        <maml:description>
+            <maml:para>Функция Get-sthPipelineParameters выводит информацию о параметрах указанной команды, 
+которые поддерживают получение данных по конвейеру.
+
+Результаты содержат имена параметров, их типы, набор параметров, в который они входят, 
+является ли он набором параметров по умолчанию, является ли параметр обязательным (Mandatory), 
+а также, какие из способов сопоставления поступающих данных - ByValue, ByPropertyName - он поддерживает.</maml:para>
+        </maml:description>
+        <command:syntax>
+            <command:syntaxItem>
+                <maml:name>Get-sthPipelineParameter</maml:name>
+
+
+                <command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByValue)" position="0" aliases="none">
+                    <maml:name>Command</maml:name>
+                    <maml:Description>
+                    <maml:para>Используется для указания одной или нескольких команд.
+
+Это может быть как имя командлета, функции или псевдонима, так и любой объект, 
+тип которого основывается на System.Management.Automation.CommandInfo, 
+к примеру, такой, как CmdletInfo, FunctionInfo или AliasInfo.</maml:para>
+                    </maml:Description>
+                    <command:parameterValue required="true" variableLength="false">System.Object[]</command:parameterValue>
+                    <dev:type>
+                        <maml:name>System.Object[]</maml:name>
+                        <maml:uri />
+                    </dev:type>
+                    <dev:defaultValue>None</dev:defaultValue>
+                </command:parameter>
+
+
+                <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+                    <maml:name>HideNotFoundCommands</maml:name>
+                    <maml:Description>
+                        <maml:para>Укажите этот параметр, когда вывод информации о ненайденных командах не требуется.</maml:para>
+                    </maml:Description>
+                    <dev:type>
+                        <maml:name>SwitchParameter</maml:name>
+                        <maml:uri />
+                    </dev:type>
+                    <dev:defaultValue>False</dev:defaultValue>
+                </command:parameter>
+            </command:syntaxItem>
+        </command:syntax>
+
+
+        <command:parameters>
+            <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
+                <maml:name>Command</maml:name>
+                <maml:Description>
+                    <maml:para>Используется для указания одной или нескольких команд.
+
+Это может быть как имя командлета, функции или псевдонима, так и любой объект, 
+тип которого основывается на System.Management.Automation.CommandInfo, 
+к примеру, такой, как CmdletInfo, FunctionInfo или AliasInfo.</maml:para>
+                </maml:Description>
+                <command:parameterValue required="true" variableLength="false">System.Object[]</command:parameterValue>
+                <dev:type>
+                    <maml:name>System.Object[]</maml:name>
+                    <maml:uri />
+                </dev:type>
+                <dev:defaultValue>None</dev:defaultValue>
+            </command:parameter>
+
+
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+                <maml:name>HideNotFoundCommands</maml:name>
+                <maml:Description>
+                        <maml:para>Укажите этот параметр, когда вывод информации о ненайденных командах не требуется.</maml:para>
+                </maml:Description>
+                <dev:type>
+                    <maml:name>SwitchParameter</maml:name>
+                    <maml:uri />
+                </dev:type>
+                <dev:defaultValue>False</dev:defaultValue>
+            </command:parameter>
+        </command:parameters>
+
+
+        <command:examples>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineParameter -Command Get-Process
+
+   Command: Get-Process
+
+ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------------                ------------            --------- ------- --------------
+Name          System.String[]              NameWithUserName        False     False   True
+Name          System.String[]              Name (IsDefault)        False     False   True
+Id            System.Int32[]               IdWithUserName          True      False   True
+Id            System.Int32[]               Id                      True      False   True
+InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject   System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  System.String[]              Id                      False     False   True
+ComputerName  System.String[]              Name (IsDefault)        False     False   True
+ComputerName  System.String[]              InputObject             False     False   True
+                </dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Команда отображает информацию о параметрах командлета Get-Process, которые поддерживают получение данных по конвейеру.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineParameter -Command Get-Verb
+
+   Command: Get-Verb
+
+ParameterName ParameterType   ParameterSet       Mandatory ByValue ByPropertyName
+------------- -------------   ------------       --------- ------- --------------
+verb          System.String[] __AllParameterSets False     True    False</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Команда отображает информацию о параметрах функции Get-Verb, которые поддерживают получение данных по конвейеру.</maml:para>
+                    <maml:para/>
+                                        <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineParameter -Command gsv
+
+   Command: Get-Service
+
+ParameterName ParameterType                             ParameterSet        Mandatory ByValue ByPropertyName
+------------- -------------                             ------------        --------- ------- --------------
+Name          System.String[]                           Default (IsDefault) False     True    True
+ComputerName  System.String[]                           __AllParameterSets  False     False   True
+InputObject   System.ServiceProcess.ServiceController[] InputObject         False     True    False</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Команда отображает информацию о параметрах командлета Get-Service, которые поддерживают получение данных по конвейеру. 
+При запросе используется его псевдоним - "gsv".</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+                <dev:code>$command = Get-Command -Name Get-Process
+$function = Get-Command -Name Get-Verb
+$alias = Get-Command gsv
+
+Get-sthPipelineParameter -Command $command, $function, $alias</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Первая команда получает объект [CmdletInfo], описывающий командлет Get-Process.
+
+Вторая команда получает объект [FunctionInfo], описывающий функцию Get-Verb.
+
+Третья команда получает объект [AliasInfo], описывающий псевдоним "gsv".
+
+Четвертая команда отображает информацию о параметрах указанных командлетов и функций, 
+которые поддерживают получение данных по конвейеру.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+                <dev:code>$command = Get-Command -Name Get-Process
+$function = Get-Command -Name Get-Verb
+$alias = Get-Command gsv
+
+$command, $function, $alias, 'Get-PSDrive', 'cat' | Get-sthPipelineParameter</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Первая команда получает объект [CmdletInfo], описывающий командлет Get-Process.
+
+Вторая команда получает объект [FunctionInfo], описывающий функцию Get-Verb.
+
+Третья команда получает объект [AliasInfo], описывающий псевдоним "gsv".
+
+Четвертая команда отображает информацию о параметрах указанных командлетов и функций, 
+которые поддерживают получение данных по конвейеру.
+
+В этот раз мы передали данные функции Get-sthPipelineParameter при помощи конвейера.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineParameter -Command Get-Process, Non-ExistingCommand
+
+   Command: Get-Process
+
+ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------------                ------------            --------- ------- --------------
+Name          System.String[]              NameWithUserName        False     False   True
+Name          System.String[]              Name (IsDefault)        False     False   True
+Id            System.Int32[]               IdWithUserName          True      False   True
+Id            System.Int32[]               Id                      True      False   True
+InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject   System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  System.String[]              Id                      False     False   True
+ComputerName  System.String[]              Name (IsDefault)        False     False   True
+ComputerName  System.String[]              InputObject             False     False   True
+
+Commands not found:
+Non-ExistingCommand</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Команда отображает информацию о параметрах командлета Get-Process, которые поддерживают получение данных по конвейеру.
+
+Также функция сообщает о несуществующей команде - "Non-ExistingCommand".</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineParameter -Command Get-Process, Non-ExistingCommand -HideNotFoundCommands
+
+   Command: Get-Process
+
+ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------------                ------------            --------- ------- --------------
+Name          System.String[]              NameWithUserName        False     False   True
+Name          System.String[]              Name (IsDefault)        False     False   True
+Id            System.Int32[]               IdWithUserName          True      False   True
+Id            System.Int32[]               Id                      True      False   True
+InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject   System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  System.String[]              Id                      False     False   True
+ComputerName  System.String[]              Name (IsDefault)        False     False   True
+ComputerName  System.String[]              InputObject             False     False   True</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Команда отображает информацию о параметрах командлета Get-Process, которые поддерживают получение данных по конвейеру.
+
+Так как мы указали параметр -HideNotFoundCommands, функция не будет сообщать о несуществующей команде.</maml:para>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 8 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineCommand -Command Get-Process, Start-Process, Stop-Process | Get-sthPipelineParameter
+
+   Command: Get-Process
+
+ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------------                ------------            --------- ------- --------------
+Name          System.String[]              NameWithUserName        False     False   True
+Name          System.String[]              Name (IsDefault)        False     False   True
+Id            System.Int32[]               IdWithUserName          True      False   True
+Id            System.Int32[]               Id                      True      False   True
+InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject   System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  System.String[]              Id                      False     False   True
+ComputerName  System.String[]              Name (IsDefault)        False     False   True
+ComputerName  System.String[]              InputObject             False     False   True
+
+
+   Command: Stop-Process
+
+ParameterName ParameterType                ParameterSet   Mandatory ByValue ByPropertyName
+------------- -------------                ------------   --------- ------- --------------
+Name          System.String[]              Name           True      False   True
+Id            System.Int32[]               Id (IsDefault) True      False   True
+InputObject   System.Diagnostics.Process[] InputObject    True      True    False</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Функция Get-sthPipelineCommand проверяет, поддерживают ли командлеты 
+Get-Process, Start-Process и Stop-Process получение данных по конвейеру.
+
+Затем функция передает полученные данные функции Get-sthPipelineParameter, 
+которая выводит информацию о поддерживающих конвейер параметрах.
+
+Так как из трех указанных команд конвейер поддерживают только две - Get-Process and Stop-Process, 
+функция Get-sthPipelineParameter не отображает информацию о паарметрах командлета Start-Process.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+        </command:examples>
+    </command:command>
+    
+</helpItems>

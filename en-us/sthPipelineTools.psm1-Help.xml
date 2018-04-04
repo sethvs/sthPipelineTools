@@ -1,0 +1,545 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml">
+    <command:command 
+        xmlns:maml="http://schemas.microsoft.com/maml/2004/10" 
+        xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" 
+        xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" 
+        xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+        <command:details>
+            <command:name>Get-sthPipelineCommand</command:name>
+            <command:verb>Get</command:verb>
+            <command:noun>sthPipelineCommand</command:noun>
+            <maml:description>
+                <maml:para>Shows whether a command supports pipelining.</maml:para>
+            </maml:description>
+        </command:details>
+        <maml:description>
+            <maml:para>Get-sthPipelineCommand checks, whether a specified command supports pipelining.</maml:para>
+        </maml:description>
+        <command:syntax>
+            <command:syntaxItem>
+                <maml:name>Get-sthPipelineCommand</maml:name>
+
+
+                <command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByValue)" position="0" aliases="none">
+                    <maml:name>Command</maml:name>
+                    <maml:Description>
+                    <maml:para>Specifies one or more commands.
+
+This can be the name of cmdlet, function or alias, or alternatively, 
+any object derived from System.Management.Automation.CommandInfo, 
+like CmdletInfo, FunctionInfo or AliasInfo.</maml:para>
+                    </maml:Description>
+                    <command:parameterValue required="true" variableLength="false">System.Object[]</command:parameterValue>
+                    <dev:type>
+                        <maml:name>System.Object[]</maml:name>
+                        <maml:uri />
+                    </dev:type>
+                    <dev:defaultValue>None</dev:defaultValue>
+                </command:parameter>
+
+
+                <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+                    <maml:name>HideNotFoundCommands</maml:name>
+                    <maml:Description>
+                        <maml:para>Specify this parameter when there is no need for information about non-existent commands.</maml:para>
+                    </maml:Description>
+                    <dev:type>
+                        <maml:name>SwitchParameter</maml:name>
+                        <maml:uri />
+                    </dev:type>
+                    <dev:defaultValue>False</dev:defaultValue>
+                </command:parameter>
+            </command:syntaxItem>
+        </command:syntax>
+
+
+        <command:parameters>
+            <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
+                <maml:name>Command</maml:name>
+                <maml:Description>
+                    <maml:para>Specifies one or more commands.
+
+This can be the name of cmdlet, function or alias, or alternatively, 
+any object derived from System.Management.Automation.CommandInfo, 
+like CmdletInfo, FunctionInfo or AliasInfo.</maml:para>
+                </maml:Description>
+                <command:parameterValue required="true" variableLength="false">System.Object[]</command:parameterValue>
+                <dev:type>
+                    <maml:name>System.Object[]</maml:name>
+                    <maml:uri />
+                </dev:type>
+                <dev:defaultValue>None</dev:defaultValue>
+            </command:parameter>
+
+
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+                <maml:name>HideNotFoundCommands</maml:name>
+                <maml:Description>
+                    <maml:para>Specify this parameter when there is no need for information about non-existent commands.</maml:para>
+                </maml:Description>
+                <dev:type>
+                    <maml:name>SwitchParameter</maml:name>
+                    <maml:uri />
+                </dev:type>
+                <dev:defaultValue>False</dev:defaultValue>
+            </command:parameter>
+        </command:parameters>
+
+
+        <command:examples>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineCommand -Command Get-Process
+
+Command     SupportsPipeline
+-------     ----------------
+Get-Process             True
+                </dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>This command checks, whether Get-Process cmdlet supports pipelining.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineCommand -Command Get-Verb
+
+Command  SupportsPipeline
+-------  ----------------
+Get-Verb             True</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>This command checks, whether Get-Verb function supports pipelining.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineCommand -Command gsv
+
+Command     SupportsPipeline
+-------     ----------------
+Get-Service             True</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Command checks, whether Get-Service cmdlet supports pipelining. 
+We used its alias 'gsv' as a parameter value.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+                <dev:code>$command = Get-Command -Name Get-Process
+$function = Get-Command -Name Get-Verb
+$alias = Get-Command gsv
+
+Get-sthPipelineCommand -Command $command, $function, $alias
+
+Command     SupportsPipeline
+-------     ----------------
+Get-Process             True
+Get-Verb                True
+Get-Service             True
+</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>The first command gets [CmdletInfo] object for Get-Process cmdlet.
+
+The second command gets [FunctionInfo] object for Get-Verb function.
+
+The third command gets [AliasInfo] object for gsv alias.
+
+The fourth command checks, whether these commands support pipelining.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+                <dev:code>$command = Get-Command -Name Get-Process
+$function = Get-Command -Name Get-Verb
+$alias = Get-Command gsv
+
+$command, $function, $alias, 'Get-PSDrive', 'cat' | Get-sthPipelineCommand
+
+Command     SupportsPipeline
+-------     ----------------
+Get-Process             True
+Get-Verb                True
+Get-Service             True
+Get-PSDrive             True
+Get-Content             True
+</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>The first command gets [CmdletInfo] object for Get-Process cmdlet.
+
+The second command gets [FunctionInfo] object for Get-Verb function.
+
+The third command gets [AliasInfo] object for gsv alias.
+
+The fourth command checks, whether these commands and Get-PSDrive and Get-Content 
+(we used its alias - 'cat') support pipelining.
+
+This time we provide commands to Get-sthPipelineCommand using pipeline.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
+                <dev:code>$commands = Get-Command -Module 'Microsoft.PowerShell.Management'
+Get-sthPipelineCommand -Command $commands
+</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>The first command gets array of cmdlets, that are members of 'Microsoft.PowerShell.Management' module.
+
+The second command displays whether these commands support pipelining.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineCommand -Command Get-Process, Non-ExistingCommand
+
+Command     SupportsPipeline
+-------     ----------------
+Get-Process             True
+
+Commands not found:
+Non-ExistingCommand</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>This command checks if two commands support pipeline - Get-Process and some nonexisting command.
+
+Result displays information about Get-Process cmdlet and also shows that Non-ExistingCommand was not found.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 8 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineCommand -Command Get-Process, Non-ExistingCommand -HideNotFoundCommands
+
+Command     SupportsPipeline
+-------     ----------------
+Get-Process             True</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>This command checks if two commands support pipeline - Get-Process and some nonexisting command.
+
+Because -HideNotFoundCommands switch parameter was used, Get-sthPipelineCommand doesn't show information about non-existing command.</maml:para>
+                </dev:remarks>
+            </command:example>
+        </command:examples>
+    </command:command>
+
+
+
+
+
+
+
+
+
+
+
+    <command:command 
+        xmlns:maml="http://schemas.microsoft.com/maml/2004/10" 
+        xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" 
+        xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" 
+        xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+        <command:details>
+            <command:name>Get-sthPipelineParameter</command:name>
+            <command:verb>Get</command:verb>
+            <command:noun>sthPipelineParameter</command:noun>
+            <maml:description>
+                <maml:para>Displays information about command parameters, that support pipelining.</maml:para>
+            </maml:description>
+        </command:details>
+        <maml:description>
+            <maml:para>Get-sthPipelineParameters finds parameters of the specified command, 
+that accept pipeline input and displays their Names, Types, Parameter Sets, 
+whether it is a default Parameter Set, whether it is a Mandatory parameter 
+as well as supported methods of accepting pipeline input - ByValue and ByPropertyName.</maml:para>
+        </maml:description>
+        <command:syntax>
+            <command:syntaxItem>
+                <maml:name>Get-sthPipelineParameter</maml:name>
+
+
+                <command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByValue)" position="0" aliases="none">
+                    <maml:name>Command</maml:name>
+                    <maml:Description>
+                    <maml:para>Specifies one or more commands.
+
+This can be the name of cmdlet, function or alias, or alternatively, 
+any object derived from System.Management.Automation.CommandInfo, 
+like CmdletInfo, FunctionInfo or AliasInfo.</maml:para>
+                    </maml:Description>
+                    <command:parameterValue required="true" variableLength="false">System.Object[]</command:parameterValue>
+                    <dev:type>
+                        <maml:name>System.Object[]</maml:name>
+                        <maml:uri />
+                    </dev:type>
+                    <dev:defaultValue>None</dev:defaultValue>
+                </command:parameter>
+
+
+                <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+                    <maml:name>HideNotFoundCommands</maml:name>
+                    <maml:Description>
+                        <maml:para>Specify this parameter when there is no need for information about non-existent commands.</maml:para>
+                    </maml:Description>
+                    <dev:type>
+                        <maml:name>SwitchParameter</maml:name>
+                        <maml:uri />
+                    </dev:type>
+                    <dev:defaultValue>False</dev:defaultValue>
+                </command:parameter>
+            </command:syntaxItem>
+        </command:syntax>
+
+
+        <command:parameters>
+            <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
+                <maml:name>Command</maml:name>
+                <maml:Description>
+                    <maml:para>Specifies one or more commands.
+
+This can be the name of cmdlet, function or alias, or alternatively, 
+any object derived from System.Management.Automation.CommandInfo, 
+like CmdletInfo, FunctionInfo or AliasInfo.</maml:para>
+                </maml:Description>
+                <command:parameterValue required="true" variableLength="false">System.Object[]</command:parameterValue>
+                <dev:type>
+                    <maml:name>System.Object[]</maml:name>
+                    <maml:uri />
+                </dev:type>
+                <dev:defaultValue>None</dev:defaultValue>
+            </command:parameter>
+
+
+            <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+                <maml:name>HideNotFoundCommands</maml:name>
+                <maml:Description>
+                        <maml:para>Specify this parameter when there is no need for information about non-existent commands.</maml:para>
+                </maml:Description>
+                <dev:type>
+                    <maml:name>SwitchParameter</maml:name>
+                    <maml:uri />
+                </dev:type>
+                <dev:defaultValue>False</dev:defaultValue>
+            </command:parameter>
+        </command:parameters>
+
+
+        <command:examples>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineParameter -Command Get-Process
+
+   Command: Get-Process
+
+ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------------                ------------            --------- ------- --------------
+Name          System.String[]              NameWithUserName        False     False   True
+Name          System.String[]              Name (IsDefault)        False     False   True
+Id            System.Int32[]               IdWithUserName          True      False   True
+Id            System.Int32[]               Id                      True      False   True
+InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject   System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  System.String[]              Id                      False     False   True
+ComputerName  System.String[]              Name (IsDefault)        False     False   True
+ComputerName  System.String[]              InputObject             False     False   True
+                </dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>This command displays information about parameters of Get-Process cmdlet, that can accept pipeline input.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineParameter -Command Get-Verb
+
+   Command: Get-Verb
+
+ParameterName ParameterType   ParameterSet       Mandatory ByValue ByPropertyName
+------------- -------------   ------------       --------- ------- --------------
+verb          System.String[] __AllParameterSets False     True    False</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>This command displays information about parameters of Get-Verb function, that can accept pipeline input.</maml:para>
+                    <maml:para/>
+                                        <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineParameter -Command gsv
+
+   Command: Get-Service
+
+ParameterName ParameterType                             ParameterSet        Mandatory ByValue ByPropertyName
+------------- -------------                             ------------        --------- ------- --------------
+Name          System.String[]                           Default (IsDefault) False     True    True
+ComputerName  System.String[]                           __AllParameterSets  False     False   True
+InputObject   System.ServiceProcess.ServiceController[] InputObject         False     True    False</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Command displays information about parameters of Get-Service cmdlet, that can accept pipeline input
+We used its alias 'gsv' as a parameter value.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+                <dev:code>$command = Get-Command -Name Get-Process
+$function = Get-Command -Name Get-Verb
+$alias = Get-Command gsv
+
+Get-sthPipelineParameter -Command $command, $function, $alias</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>The first command gets [CmdletInfo] object for Get-Process cmdlet.
+
+The second command gets [FunctionInfo] object for Get-Verb function.
+
+The third command gets [AliasInfo] object for gsv alias.
+
+The fourth command displays information about parameters 
+of specified cmdlets and functions, that support pipeline input.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+                <dev:code>$command = Get-Command -Name Get-Process
+$function = Get-Command -Name Get-Verb
+$alias = Get-Command gsv
+
+$command, $function, $alias, 'Get-PSDrive', 'cat' | Get-sthPipelineParameter</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>The first command gets [CmdletInfo] object for Get-Process cmdlet.
+
+The second command gets [FunctionInfo] object for Get-Verb function.
+
+The third command gets [AliasInfo] object for gsv alias.
+
+The fourth command displays information about parameters 
+of specified cmdlets and functions, that support pipeline input.
+
+This time we provide commands to Get-sthPipelineParameter using pipeline.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineParameter -Command Get-Process, Non-ExistingCommand
+
+   Command: Get-Process
+
+ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------------                ------------            --------- ------- --------------
+Name          System.String[]              NameWithUserName        False     False   True
+Name          System.String[]              Name (IsDefault)        False     False   True
+Id            System.Int32[]               IdWithUserName          True      False   True
+Id            System.Int32[]               Id                      True      False   True
+InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject   System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  System.String[]              Id                      False     False   True
+ComputerName  System.String[]              Name (IsDefault)        False     False   True
+ComputerName  System.String[]              InputObject             False     False   True
+
+Commands not found:
+Non-ExistingCommand</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>This command displays information about parameters of Get-Process cmdlet, that can accept pipeline input.
+Also, output contains information about non-existing command.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineParameter -Command Get-Process, Non-ExistingCommand -HideNotFoundCommands
+
+   Command: Get-Process
+
+ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------------                ------------            --------- ------- --------------
+Name          System.String[]              NameWithUserName        False     False   True
+Name          System.String[]              Name (IsDefault)        False     False   True
+Id            System.Int32[]               IdWithUserName          True      False   True
+Id            System.Int32[]               Id                      True      False   True
+InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject   System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  System.String[]              Id                      False     False   True
+ComputerName  System.String[]              Name (IsDefault)        False     False   True
+ComputerName  System.String[]              InputObject             False     False   True</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>This command displays information about parameters of Get-Process cmdlet, that can accept pipeline input.
+
+Because -HideNotFoundCommands switch parameter was used, Get-sthPipelineParameter 
+doesn't show information about non-existing command.</maml:para>
+                </dev:remarks>
+            </command:example>
+            <command:example>
+                <maml:title>-------------------------- EXAMPLE 8 --------------------------</maml:title>
+                <dev:code>Get-sthPipelineCommand -Command Get-Process, Start-Process, Stop-Process | Get-sthPipelineParameter
+
+   Command: Get-Process
+
+ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------------                ------------            --------- ------- --------------
+Name          System.String[]              NameWithUserName        False     False   True
+Name          System.String[]              Name (IsDefault)        False     False   True
+Id            System.Int32[]               IdWithUserName          True      False   True
+Id            System.Int32[]               Id                      True      False   True
+InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject   System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  System.String[]              Id                      False     False   True
+ComputerName  System.String[]              Name (IsDefault)        False     False   True
+ComputerName  System.String[]              InputObject             False     False   True
+
+
+   Command: Stop-Process
+
+ParameterName ParameterType                ParameterSet   Mandatory ByValue ByPropertyName
+------------- -------------                ------------   --------- ------- --------------
+Name          System.String[]              Name           True      False   True
+Id            System.Int32[]               Id (IsDefault) True      False   True
+InputObject   System.Diagnostics.Process[] InputObject    True      True    False</dev:code>
+                <dev:remarks>
+                    <maml:para/>
+                    <maml:para>Function Get-sthPipelineCommand gets information about whether 
+Get-Process, Start-Process and Stop-Process cmdlets support pipelining.
+
+Then it sends results to Get-sthPipelineParameter function, which returns information 
+about parameters, that can accept objects from pipeline.
+
+Of these three commands, only two - Get-Process and Stop-Process - support pipelining, 
+therefore Get-sthPipelineParameter results don't contain information about Start-Process.</maml:para>
+                    <maml:para/>
+                    <maml:para/>
+                </dev:remarks>
+            </command:example>
+        </command:examples>
+    </command:command>
+    
+</helpItems>
