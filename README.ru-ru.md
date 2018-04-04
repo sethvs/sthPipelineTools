@@ -4,9 +4,9 @@
 
 В модуль входят следующие функции:
 
-**Get-sthPipelineCommand** - Функция проверяет, поддерживает ли указанная команда получение данных по конвейеру.
+[**Get-sthPipelineCommand**](#get-sthpipelinecommand) - Функция проверяет, поддерживает ли указанная команда получение данных по конвейеру.
 
-**Get-sthPipelineParameter** - Функция Get-sthPipelineParameters выводит информацию о параметрах указанной команды, которые поддерживают получение данных по конвейеру.
+[**Get-sthPipelineParameter**](#get-sthpipelineparameter) - Функция Get-sthPipelineParameters выводит информацию о параметрах указанной команды, которые поддерживают получение данных по конвейеру.
 
 Результаты содержат имена параметров, их типы, набор параметров, в который они входят, является ли он набором параметров по умолчанию, является ли параметр обязательным (Mandatory), а также, какие из способов сопоставления поступающих данных - ByValue, ByPropertyName - он поддерживает.
 
@@ -23,7 +23,7 @@ Install-Module sthPipelineTools
 
 Команда проверяет, поддерживает ли командлет Get-Process получение данных по конвейеру.
 
-```powershell
+```
 Get-sthPipelineCommand -Command Get-Process
 
 Command     SupportsPipeline
@@ -33,9 +33,9 @@ Get-Process             True
 
 ---
 
-Команда проверяет, поллерживает ли функция Get-Verb получение данных по конвейеру.
+Команда проверяет, поддерживает ли функция Get-Verb получение данных по конвейеру.
 
-```powershell
+```
 Get-sthPipelineCommand -Command Get-Verb
 
 Command  SupportsPipeline
@@ -49,7 +49,7 @@ Get-Verb             True
 
 При запросе используется его псевдоним - "gsv".
 
-```powershell
+```
 Get-sthPipelineCommand -Command gsv
 
 Command     SupportsPipeline
@@ -67,7 +67,7 @@ Get-Service             True
 
 Четвертая команда проверяет, поддерживают ли эти команды получение данных по конвейеру.
 
-```powershell
+```
 $command = Get-Command -Name Get-Process
 $function = Get-Command -Name Get-Verb
 $alias = Get-Command gsv
@@ -93,7 +93,7 @@ Get-Service             True
 
 В этот раз мы передали данные функции Get-sthPipelineCommand при помощи конвейера.
 
-```powershell
+```
 $command = Get-Command -Name Get-Process
 $function = Get-Command -Name Get-Verb
 $alias = Get-Command gsv
@@ -115,7 +115,7 @@ Get-Content             True
 
 Вторая команда проверяет, поддерживают ли они получение данных по конвейеру.
 
-```powershell
+```
 $commands = Get-Command -Module 'Microsoft.PowerShell.Management'
 Get-sthPipelineCommand -Command $commands
 ```
@@ -126,7 +126,7 @@ Get-sthPipelineCommand -Command $commands
 
 Результат содержит информацию о Get-Process, а также сообщает о том, что команда Non-ExistingCommand не была найдена.
 
-```powershell
+```
 Get-sthPipelineCommand -Command Get-Process, Non-ExistingCommand
 
 Command     SupportsPipeline
@@ -143,7 +143,7 @@ Non-ExistingCommand
 
 Так как мы указали параметр -HideNotFoundCommands, функция не будет сообщать о несуществующей команде.
 
-```powershell
+```
 Get-sthPipelineCommand -Command Get-Process, Non-ExistingCommand -HideNotFoundCommands
 
 Command     SupportsPipeline
@@ -155,7 +155,7 @@ Get-Process             True
 
 Команда отображает информацию о параметрах командлета Get-Process, которые поддерживают получение данных по конвейеру.
 
-```powershell
+```
 Get-sthPipelineParameter -Command Get-Process
 
    Command: Get-Process
@@ -177,7 +177,7 @@ ComputerName  System.String[]              InputObject             False     Fal
 
 Команда отображает информацию о параметрах функции Get-Verb, которые поддерживают получение данных по конвейеру.
 
-```powershell
+```
 Get-sthPipelineParameter -Command Get-Verb
 
    Command: Get-Verb
@@ -193,7 +193,7 @@ verb          System.String[] __AllParameterSets False     True    False
 
 При запросе используется его псевдоним - "gsv".
 
-```powershell
+```
 Get-sthPipelineParameter -Command gsv
 
    Command: Get-Service
@@ -215,7 +215,7 @@ InputObject   System.ServiceProcess.ServiceController[] InputObject         Fals
 
 Четвертая команда отображает информацию о параметрах указанных командлетов и функций, которые поддерживают получение данных по конвейеру.
 
-```powershell
+```
 $command = Get-Command -Name Get-Process
 $function = Get-Command -Name Get-Verb
 $alias = Get-Command gsv
@@ -235,7 +235,7 @@ Get-sthPipelineParameter -Command $command, $function, $alias
 
 В этот раз мы передали данные функции Get-sthPipelineParameter при помощи конвейера.
 
-```powershell
+```
 $command = Get-Command -Name Get-Process
 $function = Get-Command -Name Get-Verb
 $alias = Get-Command gsv
@@ -249,7 +249,7 @@ $command, $function, $alias, 'Get-PSDrive', 'cat' | Get-sthPipelineParameter
 
 Также функция сообщает о несуществующей команде - "Non-ExistingCommand".
 
-```powershell
+```
 Get-sthPipelineParameter -Command Get-Process, Non-ExistingCommand
 
    Command: Get-Process
@@ -276,7 +276,7 @@ Non-ExistingCommand
 
 Так как мы указали параметр -HideNotFoundCommands, функция не будет сообщать о несуществующей команде.
 
-```powershell
+```
 Get-sthPipelineParameter -Command Get-Process, Non-ExistingCommand -HideNotFoundCommands
 
    Command: Get-Process
@@ -305,7 +305,7 @@ Get-Process, Start-Process и Stop-Process получение данных по 
 Так как из трех указанных команд конвейер поддерживают только две - Get-Process and Stop-Process, 
 функция Get-sthPipelineParameter не отображает информацию о паарметрах командлета Start-Process.
 
-```powershell
+```
 Get-sthPipelineCommand -Command Get-Process, Start-Process, Stop-Process | Get-sthPipelineParameter
 
    Command: Get-Process
