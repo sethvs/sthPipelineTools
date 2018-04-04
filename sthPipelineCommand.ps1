@@ -1,5 +1,8 @@
 Using namespace System.Management.Automation
 
+<#
+.externalHelp sthPipelineTools.psm1-Help.xml
+#>
 function Get-sthPipelineCommand
 {
     [CmdletBinding()]
@@ -47,12 +50,12 @@ function Get-sthPipelineCommand
             ForEach-Object {if ($_.ValueFromPipeline -or $_.ValueFromPipelineByPropertyName)
                 {
                     $hash.Add('SupportsPipeline',$true)
-                    [PSCustomObject]$hash
+                    [PSCustomObject]$hash | Add-Member -TypeName 'sth.PipelineCommand' -PassThru
                     continue
                 }
             }
             $hash.Add('SupportsPipeline',$false)
-            [PSCustomObject]$hash
+            [PSCustomObject]$hash | Add-Member -TypeName 'sth.PipelineCommand' -PassThru
         }
     }
 

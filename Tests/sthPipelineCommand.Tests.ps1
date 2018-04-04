@@ -10,8 +10,12 @@ describe 'Get-sthPipelineCommand' {
             $command = Get-Command -Name Get-CimInstance
             $result = Get-sthPipelineCommand -Command $command
             
-            it 'Result should be of type System.Management.Automation.PSCustomObject' {
+            it 'Result should be based on type System.Management.Automation.PSCustomObject' {
                 $result | should -BeOfType [System.Management.Automation.PSCustomObject]
+            }
+            
+            it 'Result should be of type sth.PipelineCommand' {
+                $result.pstypenames[0] | should -Be 'sth.PipelineCommand'
             }
             
             it 'Result.Command should be Get-CimInstance' {
@@ -28,8 +32,12 @@ describe 'Get-sthPipelineCommand' {
             $command = Get-Command -Name Start-Process
             $result = Get-sthPipelineCommand -Command $command
             
-            it 'Result should be of type System.Management.Automation.PSCustomObject' {
+            it 'Result should be based on type System.Management.Automation.PSCustomObject' {
                 $result | should -BeOfType [System.Management.Automation.PSCustomObject]
+            }
+            
+            it 'Result should be of type sth.PipelineCommand' {
+                $result.pstypenames[0] | should -Be 'sth.PipelineCommand'
             }
             
             it 'Result.Command should be Start-Process' {
@@ -46,8 +54,12 @@ describe 'Get-sthPipelineCommand' {
             $function = Get-Command -Name Get-Verb
             $result = Get-sthPipelineCommand -Command $function
             
-            it 'Result should be of type System.Management.Automation.PSCustomObject' {
+            it 'Result should be based on type System.Management.Automation.PSCustomObject' {
                 $result | should -BeOfType [System.Management.Automation.PSCustomObject]
+            }
+            
+            it 'Result should be of type sth.PipelineCommand' {
+                $result.pstypenames[0] | should -Be 'sth.PipelineCommand'
             }
             
             it 'Result.Command should be Get-Verb' {
@@ -64,8 +76,12 @@ describe 'Get-sthPipelineCommand' {
             $alias = Get-Command -Name gcim
             $result = Get-sthPipelineCommand -Command $alias
             
-            it 'Result should be of type System.Management.Automation.PSCustomObject' {
+            it 'Result should be based on type System.Management.Automation.PSCustomObject' {
                 $result | should -BeOfType [System.Management.Automation.PSCustomObject]
+            }
+            
+            it 'Result should be of type sth.PipelineCommand' {
+                $result.pstypenames[0] | should -Be 'sth.PipelineCommand'
             }
             
             it 'Result.Command should be Get-CimInstance' {
@@ -81,8 +97,12 @@ describe 'Get-sthPipelineCommand' {
             
             $result = Get-sthPipelineCommand -Command 'Get-CimInstance'
             
-            it 'Result should be of type System.Management.Automation.PSCustomObject' {
+            it 'Result should be based on type System.Management.Automation.PSCustomObject' {
                 $result | should -BeOfType [System.Management.Automation.PSCustomObject]
+            }
+            
+            it 'Result should be of type sth.PipelineCommand' {
+                $result.pstypenames[0] | should -Be 'sth.PipelineCommand'
             }
             
             it 'Result.Command should be Get-CimInstance' {
@@ -98,8 +118,12 @@ describe 'Get-sthPipelineCommand' {
             
             $result = Get-sthPipelineCommand -Command 'gcim'
             
-            it 'Result should be of type System.Management.Automation.PSCustomObject' {
+            it 'Result should be based on type System.Management.Automation.PSCustomObject' {
                 $result | should -BeOfType [System.Management.Automation.PSCustomObject]
+            }
+            
+            it 'Result should be of type sth.PipelineCommand' {
+                $result.pstypenames[0] | should -Be 'sth.PipelineCommand'
             }
             
             it 'Result.Command should be Get-CimInstance' {
@@ -158,8 +182,12 @@ describe 'Get-sthPipelineCommand' {
             $command = Get-Command -Name Get-CimInstance
             $result = Get-sthPipelineCommand $command
             
-            it 'Result should be of type System.Management.Automation.PSCustomObject' {
+            it 'Result should be based on type System.Management.Automation.PSCustomObject' {
                 $result | should -BeOfType [System.Management.Automation.PSCustomObject]
+            }
+            
+            it 'Result should be of type sth.PipelineCommand' {
+                $result.pstypenames[0] | should -Be 'sth.PipelineCommand'
             }
             
             it 'Result.Command should be Get-CimInstance' {
@@ -181,8 +209,12 @@ describe 'Get-sthPipelineCommand' {
             $alias = Get-Command -Name gps
             $result = $command, $function, $alias, 'Get-PSDrive', 'gsv' | Get-sthPipelineCommand
             
-            it 'Result should be of type System.Management.Automation.PSCustomObject' {
-                $result | Should -BeOfType -ExpectedType [System.Management.Automation.PSCustomObject]
+            it 'Result should be based on type System.Management.Automation.PSCustomObject' {
+                $result[0] | should -BeOfType -ExpectedType [System.Management.Automation.PSCustomObject]
+            }
+            
+            it 'Result should be of type sth.PipelineCommand' {
+                $result[0].pstypenames[0] | should -Be 'sth.PipelineCommand'
             }
             
             it 'Result at position <index> should be: <Command>, <SupportsPipeline>' -TestCases @(

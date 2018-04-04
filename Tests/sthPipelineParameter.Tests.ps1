@@ -303,14 +303,15 @@ describe 'Get-sthPipelineParameter' {
                 $result[0].pstypenames[0] | should -Be 'sth.PipelineParameter'
             }
             
-            it 'Command <Command> Parameter <ParameterName> <index> should be: <Command>, <SupportsPipeline>' -TestCases @(
+            # it 'Command <Command> Parameter <ParameterName> ParameterSet <ParameterSet> should be: <Command>, <SupportsPipeline>' -TestCases @(
+            it 'Entry should exist: Command: <Command> Parameter: <ParameterName> ParameterType: <ParameterType> ParameterSet: <ParameterSet> Mandatory: <Mandatory> ByValue: <ByValue> ByPropertyName :<ByPropertyName>' -TestCases @(
             @{Command = 'Get-CimInstance'; ParameterName = 'ClassName'; ParameterType = 'System.String'; ParameterSet = 'ClassNameComputerSet (IsDefault)'; Mandatory = $true; ByValue = $false; ByPropertyName = $true},
             @{Command = 'Get-Verb'; ParameterName = 'verb'; ParameterType = 'System.String[]'; ParameterSet = '__AllParameterSets'; Mandatory = $false; ByValue = $true; ByPropertyName = $false},
             @{Command = 'Get-Process'; ParameterName = 'Name'; ParameterType = 'System.String[]'; ParameterSet = 'Name (IsDefault)'; Mandatory = $false; ByValue = $false; ByPropertyName = $true},
             @{Command = 'Get-PSDrive'; ParameterName = 'Name'; ParameterType = 'System.String[]'; ParameterSet = 'Name (IsDefault)'; Mandatory = $false; ByValue = $false; ByPropertyName = $true},
             @{Command = 'Get-Service'; ParameterName = 'Name'; ParameterType = 'System.String[]'; ParameterSet = 'Default (IsDefault)'; Mandatory = $false; ByValue = $true; ByPropertyName = $true}
             )   {
-                    Param($index,$Command,$ParameterName,$ParameterType,$ParameterSet,$Mandatory,$ByValue,$ByPropertyName)
+                    Param($Command,$ParameterName,$ParameterType,$ParameterSet,$Mandatory,$ByValue,$ByPropertyName)
                     $element = $result | Where-Object -FilterScript {$_.Command -eq $Command -and $_.ParameterName -eq $ParameterName -and  $_.ParameterSet -eq $ParameterSet}
                     
                     $element.Command | should -Be $Command

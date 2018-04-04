@@ -1,10 +1,13 @@
 Using namespace System.Management.Automation
 
+<#
+.externalHelp sthPipelineTools.psm1-Help.xml
+#>
 function Get-sthPipelineParameter
 {
     Param(
         [Parameter(ValueFromPipeline)]
-        [System.Object]$Command,
+        [System.Object[]]$Command,
         [switch]$HideNotFoundCommands
     )
 
@@ -17,6 +20,18 @@ function Get-sthPipelineParameter
     {
         foreach ($cmd in $Command)
         {
+            if ($cmd.pstypenames -contains 'sth.PipelineCommand')
+            {
+                if ($cmd.SupportsPipeline -eq $true)
+                {
+                    $cmd = $cmd.Command
+                }
+                else
+                {
+                    continue
+                }
+            }
+
             if (($cmd -isnot [string]) -and ($cmd -isnot [CommandInfo]))
             {
                 $CommandNotFound += $foreach.current.ToString()
