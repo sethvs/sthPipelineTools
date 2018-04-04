@@ -144,8 +144,7 @@ Command     SupportsPipeline
 -------     ----------------
 Get-Process             True
 Get-Verb                True
-Get-Service             True
-</dev:code>
+Get-Service             True</dev:code>
                 <dev:remarks>
                     <maml:para/>
                     <maml:para>The first command gets [CmdletInfo] object for Get-Process cmdlet.
@@ -173,8 +172,7 @@ Get-Process             True
 Get-Verb                True
 Get-Service             True
 Get-PSDrive             True
-Get-Content             True
-</dev:code>
+Get-Content             True</dev:code>
                 <dev:remarks>
                     <maml:para/>
                     <maml:para>The first command gets [CmdletInfo] object for Get-Process cmdlet.
@@ -194,8 +192,7 @@ This time we provide commands to Get-sthPipelineCommand using pipeline.</maml:pa
             <command:example>
                 <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
                 <dev:code>$commands = Get-Command -Module 'Microsoft.PowerShell.Management'
-Get-sthPipelineCommand -Command $commands
-</dev:code>
+Get-sthPipelineCommand -Command $commands</dev:code>
                 <dev:remarks>
                     <maml:para/>
                     <maml:para>The first command gets array of cmdlets, that are members of 'Microsoft.PowerShell.Management' module.
@@ -265,7 +262,7 @@ Because -HideNotFoundCommands switch parameter was used, Get-sthPipelineCommand 
             </maml:description>
         </command:details>
         <maml:description>
-            <maml:para>Get-sthPipelineParameters finds parameters of the specified command, 
+            <maml:para>Get-sthPipelineParameters discovers parameters of the specified command, 
 that accept pipeline input and displays their Names, Types, Parameter Sets, 
 whether it is a default Parameter Set, whether it is a Mandatory parameter 
 as well as supported methods of accepting pipeline input - ByValue and ByPropertyName.</maml:para>
@@ -396,7 +393,7 @@ ComputerName  System.String[]                           __AllParameterSets  Fals
 InputObject   System.ServiceProcess.ServiceController[] InputObject         False     True    False</dev:code>
                 <dev:remarks>
                     <maml:para/>
-                    <maml:para>Command displays information about parameters of Get-Service cmdlet, that can accept pipeline input
+                    <maml:para>Command displays information about parameters of Get-Service cmdlet, that can accept pipeline input.
 We used its alias 'gsv' as a parameter value.</maml:para>
                     <maml:para/>
                     <maml:para/>
