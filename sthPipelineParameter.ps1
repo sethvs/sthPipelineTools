@@ -67,6 +67,7 @@ function Get-sthPipelineParameter
                         $hash = [ordered]@{
                             Command = $cmd.Name
                             ParameterName = $parameter.Name
+                            Aliases = $parameter.Aliases
                             ParameterType = $parameter.ParameterType
                             ParameterSet = $ParameterSet
                             Mandatory = $a.Mandatory

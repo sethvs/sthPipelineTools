@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+    <Type>
+        <Name>sth.PipelineParameter</Name>
+        <Members>
+            <ScriptProperty>
+                <Name>AliasesString</Name>
+                <GetScriptBlock>
+                    $this.Aliases -join ', '
+                </GetScriptBlock>
+            </ScriptProperty>
+        </Members>
+    </Type>
+</Types>

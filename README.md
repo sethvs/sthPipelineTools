@@ -6,7 +6,7 @@ It contains following functions:
 
 [**Get-sthPipelineCommand**](#get-sthpipelinecommand) - Function checks, whether a specified command supports pipelining.
 
-[**Get-sthPipelineParameter**](#get-sthpipelineparameter) - Function discovers parameters of the specified command, that accept pipeline input and displays their Names, Types, Parameter Sets, whether it is a default Parameter Set, whether it is a Mandatory parameter as well as supported methods of accepting pipeline input - ByValue and ByPropertyName.
+[**Get-sthPipelineParameter**](#get-sthpipelineparameter) - Function discovers parameters of the specified command, that accept pipeline input and displays their Names, Aliases, Types, Parameter Sets, whether it is a default Parameter Set, whether it is a Mandatory parameter as well as supported methods of accepting pipeline input - ByValue and ByPropertyName.
 
 You can install sthPipelineTools module from PowerShell Gallery:
 
@@ -157,17 +157,17 @@ Get-sthPipelineParameter -Command Get-Process
 
    Command: Get-Process
 
-ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
-------------- -------------                ------------            --------- ------- --------------
-Name          System.String[]              NameWithUserName        False     False   True
-Name          System.String[]              Name (IsDefault)        False     False   True
-Id            System.Int32[]               IdWithUserName          True      False   True
-Id            System.Int32[]               Id                      True      False   True
-InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
-InputObject   System.Diagnostics.Process[] InputObject             True      True    False
-ComputerName  System.String[]              Id                      False     False   True
-ComputerName  System.String[]              Name (IsDefault)        False     False   True
-ComputerName  System.String[]              InputObject             False     False   True
+ParameterName Aliases     ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------     -------------                ------------            --------- ------- --------------
+Name          ProcessName System.String[]              NameWithUserName        False     False   True
+Name          ProcessName System.String[]              Name (IsDefault)        False     False   True
+Id            PID         System.Int32[]               IdWithUserName          True      False   True
+Id            PID         System.Int32[]               Id                      True      False   True
+InputObject               System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject               System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  Cn          System.String[]              Id                      False     False   True
+ComputerName  Cn          System.String[]              Name (IsDefault)        False     False   True
+ComputerName  Cn          System.String[]              InputObject             False     False   True
 ```
 
 ---
@@ -179,9 +179,9 @@ Get-sthPipelineParameter -Command Get-Verb
 
    Command: Get-Verb
 
-ParameterName ParameterType   ParameterSet       Mandatory ByValue ByPropertyName
-------------- -------------   ------------       --------- ------- --------------
-verb          System.String[] __AllParameterSets False     True    False
+ParameterName Aliases ParameterType   ParameterSet       Mandatory ByValue ByPropertyName
+------------- ------- -------------   ------------       --------- ------- --------------
+verb                  System.String[] __AllParameterSets False     True    False
 ```
 
 ---
@@ -195,11 +195,11 @@ Get-sthPipelineParameter -Command gsv
 
    Command: Get-Service
 
-ParameterName ParameterType                             ParameterSet        Mandatory ByValue ByPropertyName
-------------- -------------                             ------------        --------- ------- --------------
-Name          System.String[]                           Default (IsDefault) False     True    True
-ComputerName  System.String[]                           __AllParameterSets  False     False   True
-InputObject   System.ServiceProcess.ServiceController[] InputObject         False     True    False
+ParameterName Aliases     ParameterType                             ParameterSet        Mandatory ByValue ByPropertyName
+------------- -------     -------------                             ------------        --------- ------- --------------
+Name          ServiceName System.String[]                           Default (IsDefault) False     True    True
+ComputerName  Cn          System.String[]                           __AllParameterSets  False     False   True
+InputObject               System.ServiceProcess.ServiceController[] InputObject         False     True    False
 ```
 
 ---
@@ -251,17 +251,17 @@ Get-sthPipelineParameter -Command Get-Process, Non-ExistingCommand
 
    Command: Get-Process
 
-ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
-------------- -------------                ------------            --------- ------- --------------
-Name          System.String[]              NameWithUserName        False     False   True
-Name          System.String[]              Name (IsDefault)        False     False   True
-Id            System.Int32[]               IdWithUserName          True      False   True
-Id            System.Int32[]               Id                      True      False   True
-InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
-InputObject   System.Diagnostics.Process[] InputObject             True      True    False
-ComputerName  System.String[]              Id                      False     False   True
-ComputerName  System.String[]              Name (IsDefault)        False     False   True
-ComputerName  System.String[]              InputObject             False     False   True
+ParameterName Aliases     ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------     -------------                ------------            --------- ------- --------------
+Name          ProcessName System.String[]              NameWithUserName        False     False   True
+Name          ProcessName System.String[]              Name (IsDefault)        False     False   True
+Id            PID         System.Int32[]               IdWithUserName          True      False   True
+Id            PID         System.Int32[]               Id                      True      False   True
+InputObject               System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject               System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  Cn          System.String[]              Id                      False     False   True
+ComputerName  Cn          System.String[]              Name (IsDefault)        False     False   True
+ComputerName  Cn          System.String[]              InputObject             False     False   True
 
 Commands not found:
 Non-ExistingCommand
@@ -279,17 +279,17 @@ Get-sthPipelineParameter -Command Get-Process, Non-ExistingCommand -HideNotFound
 
    Command: Get-Process
 
-ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
-------------- -------------                ------------            --------- ------- --------------
-Name          System.String[]              NameWithUserName        False     False   True
-Name          System.String[]              Name (IsDefault)        False     False   True
-Id            System.Int32[]               IdWithUserName          True      False   True
-Id            System.Int32[]               Id                      True      False   True
-InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
-InputObject   System.Diagnostics.Process[] InputObject             True      True    False
-ComputerName  System.String[]              Id                      False     False   True
-ComputerName  System.String[]              Name (IsDefault)        False     False   True
-ComputerName  System.String[]              InputObject             False     False   True
+ParameterName Aliases     ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------     -------------                ------------            --------- ------- --------------
+Name          ProcessName System.String[]              NameWithUserName        False     False   True
+Name          ProcessName System.String[]              Name (IsDefault)        False     False   True
+Id            PID         System.Int32[]               IdWithUserName          True      False   True
+Id            PID         System.Int32[]               Id                      True      False   True
+InputObject               System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject               System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  Cn          System.String[]              Id                      False     False   True
+ComputerName  Cn          System.String[]              Name (IsDefault)        False     False   True
+ComputerName  Cn          System.String[]              InputObject             False     False   True
 ```
 
 ---
@@ -305,24 +305,24 @@ Get-sthPipelineCommand -Command Get-Process, Start-Process, Stop-Process | Get-s
 
    Command: Get-Process
 
-ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
-------------- -------------                ------------            --------- ------- --------------
-Name          System.String[]              NameWithUserName        False     False   True
-Name          System.String[]              Name (IsDefault)        False     False   True
-Id            System.Int32[]               IdWithUserName          True      False   True
-Id            System.Int32[]               Id                      True      False   True
-InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
-InputObject   System.Diagnostics.Process[] InputObject             True      True    False
-ComputerName  System.String[]              Id                      False     False   True
-ComputerName  System.String[]              Name (IsDefault)        False     False   True
-ComputerName  System.String[]              InputObject             False     False   True
+ParameterName Aliases     ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------     -------------                ------------            --------- ------- --------------
+Name          ProcessName System.String[]              NameWithUserName        False     False   True
+Name          ProcessName System.String[]              Name (IsDefault)        False     False   True
+Id            PID         System.Int32[]               IdWithUserName          True      False   True
+Id            PID         System.Int32[]               Id                      True      False   True
+InputObject               System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject               System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  Cn          System.String[]              Id                      False     False   True
+ComputerName  Cn          System.String[]              Name (IsDefault)        False     False   True
+ComputerName  Cn          System.String[]              InputObject             False     False   True
 
 
    Command: Stop-Process
 
-ParameterName ParameterType                ParameterSet   Mandatory ByValue ByPropertyName
-------------- -------------                ------------   --------- ------- --------------
-Name          System.String[]              Name           True      False   True
-Id            System.Int32[]               Id (IsDefault) True      False   True
-InputObject   System.Diagnostics.Process[] InputObject    True      True    False
+ParameterName Aliases     ParameterType                ParameterSet   Mandatory ByValue ByPropertyName
+------------- -------     -------------                ------------   --------- ------- --------------
+Name          ProcessName System.String[]              Name           True      False   True
+Id                        System.Int32[]               Id (IsDefault) True      False   True
+InputObject               System.Diagnostics.Process[] InputObject    True      True    False
 ```

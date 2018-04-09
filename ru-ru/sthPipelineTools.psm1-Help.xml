@@ -268,7 +268,7 @@ Get-Process             True</dev:code>
             <maml:para>Функция Get-sthPipelineParameters выводит информацию о параметрах указанной команды, 
 которые поддерживают получение данных по конвейеру.
 
-Результаты содержат имена параметров, их типы, набор параметров, в который они входят, 
+Результаты содержат имена и псевдонимы параметров, их типы, набор параметров, в который они входят, 
 является ли он набором параметров по умолчанию, является ли параметр обязательным (Mandatory), 
 а также, какие из способов сопоставления поступающих данных - ByValue, ByPropertyName - он поддерживает.</maml:para>
         </maml:description>
@@ -350,18 +350,17 @@ Get-Process             True</dev:code>
 
    Command: Get-Process
 
-ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
-------------- -------------                ------------            --------- ------- --------------
-Name          System.String[]              NameWithUserName        False     False   True
-Name          System.String[]              Name (IsDefault)        False     False   True
-Id            System.Int32[]               IdWithUserName          True      False   True
-Id            System.Int32[]               Id                      True      False   True
-InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
-InputObject   System.Diagnostics.Process[] InputObject             True      True    False
-ComputerName  System.String[]              Id                      False     False   True
-ComputerName  System.String[]              Name (IsDefault)        False     False   True
-ComputerName  System.String[]              InputObject             False     False   True
-                </dev:code>
+ParameterName Aliases     ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------     -------------                ------------            --------- ------- --------------
+Name          ProcessName System.String[]              NameWithUserName        False     False   True
+Name          ProcessName System.String[]              Name (IsDefault)        False     False   True
+Id            PID         System.Int32[]               IdWithUserName          True      False   True
+Id            PID         System.Int32[]               Id                      True      False   True
+InputObject               System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject               System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  Cn          System.String[]              Id                      False     False   True
+ComputerName  Cn          System.String[]              Name (IsDefault)        False     False   True
+ComputerName  Cn          System.String[]              InputObject             False     False   True</dev:code>
                 <dev:remarks>
                     <maml:para/>
                     <maml:para>Команда отображает информацию о параметрах командлета Get-Process, которые поддерживают получение данных по конвейеру.</maml:para>
@@ -375,9 +374,9 @@ ComputerName  System.String[]              InputObject             False     Fal
 
    Command: Get-Verb
 
-ParameterName ParameterType   ParameterSet       Mandatory ByValue ByPropertyName
-------------- -------------   ------------       --------- ------- --------------
-verb          System.String[] __AllParameterSets False     True    False</dev:code>
+ParameterName Aliases ParameterType   ParameterSet       Mandatory ByValue ByPropertyName
+------------- ------- -------------   ------------       --------- ------- --------------
+verb                  System.String[] __AllParameterSets False     True    False</dev:code>
                 <dev:remarks>
                     <maml:para/>
                     <maml:para>Команда отображает информацию о параметрах функции Get-Verb, которые поддерживают получение данных по конвейеру.</maml:para>
@@ -391,11 +390,11 @@ verb          System.String[] __AllParameterSets False     True    False</dev:co
 
    Command: Get-Service
 
-ParameterName ParameterType                             ParameterSet        Mandatory ByValue ByPropertyName
-------------- -------------                             ------------        --------- ------- --------------
-Name          System.String[]                           Default (IsDefault) False     True    True
-ComputerName  System.String[]                           __AllParameterSets  False     False   True
-InputObject   System.ServiceProcess.ServiceController[] InputObject         False     True    False</dev:code>
+ParameterName Aliases     ParameterType                             ParameterSet        Mandatory ByValue ByPropertyName
+------------- -------     -------------                             ------------        --------- ------- --------------
+Name          ServiceName System.String[]                           Default (IsDefault) False     True    True
+ComputerName  Cn          System.String[]                           __AllParameterSets  False     False   True
+InputObject               System.ServiceProcess.ServiceController[] InputObject         False     True    False</dev:code>
                 <dev:remarks>
                     <maml:para/>
                     <maml:para>Команда отображает информацию о параметрах командлета Get-Service, которые поддерживают получение данных по конвейеру. 
@@ -454,17 +453,17 @@ $command, $function, $alias, 'Get-PSDrive', 'cat' | Get-sthPipelineParameter</de
 
    Command: Get-Process
 
-ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
-------------- -------------                ------------            --------- ------- --------------
-Name          System.String[]              NameWithUserName        False     False   True
-Name          System.String[]              Name (IsDefault)        False     False   True
-Id            System.Int32[]               IdWithUserName          True      False   True
-Id            System.Int32[]               Id                      True      False   True
-InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
-InputObject   System.Diagnostics.Process[] InputObject             True      True    False
-ComputerName  System.String[]              Id                      False     False   True
-ComputerName  System.String[]              Name (IsDefault)        False     False   True
-ComputerName  System.String[]              InputObject             False     False   True
+ParameterName Aliases     ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------     -------------                ------------            --------- ------- --------------
+Name          ProcessName System.String[]              NameWithUserName        False     False   True
+Name          ProcessName System.String[]              Name (IsDefault)        False     False   True
+Id            PID         System.Int32[]               IdWithUserName          True      False   True
+Id            PID         System.Int32[]               Id                      True      False   True
+InputObject               System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject               System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  Cn          System.String[]              Id                      False     False   True
+ComputerName  Cn          System.String[]              Name (IsDefault)        False     False   True
+ComputerName  Cn          System.String[]              InputObject             False     False   True
 
 Commands not found:
 Non-ExistingCommand</dev:code>
@@ -483,17 +482,17 @@ Non-ExistingCommand</dev:code>
 
    Command: Get-Process
 
-ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
-------------- -------------                ------------            --------- ------- --------------
-Name          System.String[]              NameWithUserName        False     False   True
-Name          System.String[]              Name (IsDefault)        False     False   True
-Id            System.Int32[]               IdWithUserName          True      False   True
-Id            System.Int32[]               Id                      True      False   True
-InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
-InputObject   System.Diagnostics.Process[] InputObject             True      True    False
-ComputerName  System.String[]              Id                      False     False   True
-ComputerName  System.String[]              Name (IsDefault)        False     False   True
-ComputerName  System.String[]              InputObject             False     False   True</dev:code>
+ParameterName Aliases     ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------     -------------                ------------            --------- ------- --------------
+Name          ProcessName System.String[]              NameWithUserName        False     False   True
+Name          ProcessName System.String[]              Name (IsDefault)        False     False   True
+Id            PID         System.Int32[]               IdWithUserName          True      False   True
+Id            PID         System.Int32[]               Id                      True      False   True
+InputObject               System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject               System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  Cn          System.String[]              Id                      False     False   True
+ComputerName  Cn          System.String[]              Name (IsDefault)        False     False   True
+ComputerName  Cn          System.String[]              InputObject             False     False   True</dev:code>
                 <dev:remarks>
                     <maml:para/>
                     <maml:para>Команда отображает информацию о параметрах командлета Get-Process, которые поддерживают получение данных по конвейеру.
@@ -507,26 +506,26 @@ ComputerName  System.String[]              InputObject             False     Fal
 
    Command: Get-Process
 
-ParameterName ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
-------------- -------------                ------------            --------- ------- --------------
-Name          System.String[]              NameWithUserName        False     False   True
-Name          System.String[]              Name (IsDefault)        False     False   True
-Id            System.Int32[]               IdWithUserName          True      False   True
-Id            System.Int32[]               Id                      True      False   True
-InputObject   System.Diagnostics.Process[] InputObjectWithUserName True      True    False
-InputObject   System.Diagnostics.Process[] InputObject             True      True    False
-ComputerName  System.String[]              Id                      False     False   True
-ComputerName  System.String[]              Name (IsDefault)        False     False   True
-ComputerName  System.String[]              InputObject             False     False   True
+ParameterName Aliases     ParameterType                ParameterSet            Mandatory ByValue ByPropertyName
+------------- -------     -------------                ------------            --------- ------- --------------
+Name          ProcessName System.String[]              NameWithUserName        False     False   True
+Name          ProcessName System.String[]              Name (IsDefault)        False     False   True
+Id            PID         System.Int32[]               IdWithUserName          True      False   True
+Id            PID         System.Int32[]               Id                      True      False   True
+InputObject               System.Diagnostics.Process[] InputObjectWithUserName True      True    False
+InputObject               System.Diagnostics.Process[] InputObject             True      True    False
+ComputerName  Cn          System.String[]              Id                      False     False   True
+ComputerName  Cn          System.String[]              Name (IsDefault)        False     False   True
+ComputerName  Cn          System.String[]              InputObject             False     False   True
 
 
    Command: Stop-Process
 
-ParameterName ParameterType                ParameterSet   Mandatory ByValue ByPropertyName
-------------- -------------                ------------   --------- ------- --------------
-Name          System.String[]              Name           True      False   True
-Id            System.Int32[]               Id (IsDefault) True      False   True
-InputObject   System.Diagnostics.Process[] InputObject    True      True    False</dev:code>
+ParameterName Aliases     ParameterType                ParameterSet   Mandatory ByValue ByPropertyName
+------------- -------     -------------                ------------   --------- ------- --------------
+Name          ProcessName System.String[]              Name           True      False   True
+Id                        System.Int32[]               Id (IsDefault) True      False   True
+InputObject               System.Diagnostics.Process[] InputObject    True      True    False</dev:code>
                 <dev:remarks>
                     <maml:para/>
                     <maml:para>Функция Get-sthPipelineCommand проверяет, поддерживают ли командлеты 

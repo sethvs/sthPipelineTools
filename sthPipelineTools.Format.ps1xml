@@ -12,6 +12,9 @@
             <TableControl>
                 <TableHeaders>
                     <TableColumnHeader/>
+                    <TableColumnHeader>
+                        <Label>Aliases</Label>
+                    </TableColumnHeader>
                     <TableColumnHeader/>
                     <TableColumnHeader/>
                     <TableColumnHeader/>
@@ -23,6 +26,9 @@
                         <TableColumnItems>
                             <TableColumnItem>
                                 <PropertyName>ParameterName</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>AliasesString</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <PropertyName>ParameterType</PropertyName>
