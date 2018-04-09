@@ -1,8 +1,21 @@
 Remove-Module -Name sthPipelineTools -Force -ErrorAction 'SilentlyContinue'
-. "$PSScriptRoot\..\sthPipelineParameter.ps1"
+# . "$PSScriptRoot\..\sthPipelineParameter.ps1"
+Import-Module "$PSScriptRoot\..\sthPipelineTools.psd1"
 
 describe 'Get-sthPipelineParameter' {
-    
+    function Test-inElement
+    {
+        Param($Property, $Value)
+        if ($Property -eq 'ParameterType')
+        {
+            $element.$Property.FullName | Should -Be $Value
+        }
+        else
+        {
+            $element.$Property | should -Be $Value
+        }
+    }
+
     context 'Using Named Parameters' {
 
         context 'Supplying Get-CimInstance [CmdletInfo] object' {
@@ -22,25 +35,17 @@ describe 'Get-sthPipelineParameter' {
                 $element = $result | Where-Object -FilterScript {$_.ParameterName -match 'ClassName' -and  $_.ParameterSet -match 'ClassNameComputerSet'}
 
                 it '<Property> property should be <Value>' -TestCases @(
-                    @{Property = 'Command'; Value = 'Get-CimInstance'},
+                    @{Property = 'Command'; Value = 'Get-CimInstance'}
                     @{Property = 'ParameterName'; Value = 'ClassName'}
-                )   {
-                    Param($Property, $Value)
-                    $element.$Property | should -Be $Value
-                }
-
-                it "'ParameterType' should be 'System.String'" {
-                    $element.ParameterType.FullName | Should -Be 'System.String'
-                }
-
-                it '<Property> property should be <Value>' -TestCases @(
-                    @{Property = 'ParameterSet'; Value = 'ClassNameComputerSet (IsDefault)'},    
-                    @{Property = 'Mandatory'; Value = $true},
-                    @{Property = 'ByValue'; Value = $false},
+                    @{Property = 'Aliases'; Value = $null}
+                    @{Property = 'AliasesString'; Value = ""}
+                    @{Property = 'ParameterType'; Value = "System.String"}
+                    @{Property = 'ParameterSet'; Value = 'ClassNameComputerSet (IsDefault)'}
+                    @{Property = 'Mandatory'; Value = $true}
+                    @{Property = 'ByValue'; Value = $false}
                     @{Property = 'ByPropertyName'; Value = $true}
-                )   {                    
-                    Param($Property, $Value)
-                    $element.$Property | should -Be $Value
+                )   {
+                    Test-inElement @args
                 }
             }
         }
@@ -62,25 +67,17 @@ describe 'Get-sthPipelineParameter' {
                 $element = $result
 
                 it '<Property> property should be <Value>' -TestCases @(
-                    @{Property = 'Command'; Value = 'Get-Verb'},
+                    @{Property = 'Command'; Value = 'Get-Verb'}
                     @{Property = 'ParameterName'; Value = 'verb'}
-                )   {
-                    Param($Property, $Value)
-                    $element.$Property | should -Be $Value
-                }
-
-                it "'ParameterType' should be 'System.String[]'" {
-                    $element.ParameterType.FullName | Should -Be 'System.String[]'
-                }
-
-                it '<Property> property should be <Value>' -TestCases @(
-                    @{Property = 'ParameterSet'; Value = '__AllParameterSets'},
-                    @{Property = 'Mandatory'; Value = $false},
-                    @{Property = 'ByValue'; Value = $true},
+                    @{Property = 'Aliases'; Value = $null}
+                    @{Property = 'AliasesString'; Value = ""}
+                    @{Property = 'ParameterType'; Value = "System.String[]"}
+                    @{Property = 'ParameterSet'; Value = '__AllParameterSets'}
+                    @{Property = 'Mandatory'; Value = $false}
+                    @{Property = 'ByValue'; Value = $true}
                     @{Property = 'ByPropertyName'; Value = $false}
-                )   {                    
-                    Param($Property, $Value)
-                    $element.$Property | should -Be $Value
+                )   {
+                    Test-inElement @args
                 }
             }
         }
@@ -102,25 +99,17 @@ describe 'Get-sthPipelineParameter' {
                 $element = $result | Where-Object -FilterScript {$_.ParameterName -match 'ClassName' -and  $_.ParameterSet -match 'ClassNameComputerSet'}
 
                 it '<Property> property should be <Value>' -TestCases @(
-                    @{Property = 'Command'; Value = 'Get-CimInstance'},
+                    @{Property = 'Command'; Value = 'Get-CimInstance'}
                     @{Property = 'ParameterName'; Value = 'ClassName'}
-                )   {
-                    Param($Property, $Value)
-                    $element.$Property | should -Be $Value
-                }
-
-                it "'ParameterType' should be 'System.String'" {
-                    $element.ParameterType.FullName | Should -Be 'System.String'
-                }
-
-                it '<Property> property should be <Value>' -TestCases @(
+                    @{Property = 'Aliases'; Value = $null}
+                    @{Property = 'AliasesString'; Value = ""}
+                    @{Property = 'ParameterType'; Value = "System.String"}
                     @{Property = 'ParameterSet'; Value = 'ClassNameComputerSet (IsDefault)'},    
                     @{Property = 'Mandatory'; Value = $true},
                     @{Property = 'ByValue'; Value = $false},
                     @{Property = 'ByPropertyName'; Value = $true}
-                )   {                    
-                    Param($Property, $Value)
-                    $element.$Property | should -Be $Value
+                )   {
+                    Test-inElement @args
                 }
             }
         }
@@ -141,25 +130,17 @@ describe 'Get-sthPipelineParameter' {
                 $element = $result | Where-Object -FilterScript {$_.ParameterName -match 'ClassName' -and  $_.ParameterSet -match 'ClassNameComputerSet'}
 
                 it '<Property> property should be <Value>' -TestCases @(
-                    @{Property = 'Command'; Value = 'Get-CimInstance'},
+                    @{Property = 'Command'; Value = 'Get-CimInstance'}
                     @{Property = 'ParameterName'; Value = 'ClassName'}
-                )   {
-                    Param($Property, $Value)
-                    $element.$Property | should -Be $Value
-                }
-
-                it "'ParameterType' should be 'System.String'" {
-                    $element.ParameterType.FullName | Should -Be 'System.String'
-                }
-
-                it '<Property> property should be <Value>' -TestCases @(
-                    @{Property = 'ParameterSet'; Value = 'ClassNameComputerSet (IsDefault)'},    
-                    @{Property = 'Mandatory'; Value = $true},
-                    @{Property = 'ByValue'; Value = $false},
+                    @{Property = 'Aliases'; Value = $null}
+                    @{Property = 'AliasesString'; Value = ""}
+                    @{Property = 'ParameterType'; Value = "System.String"}
+                    @{Property = 'ParameterSet'; Value = 'ClassNameComputerSet (IsDefault)'}
+                    @{Property = 'Mandatory'; Value = $true}
+                    @{Property = 'ByValue'; Value = $false}
                     @{Property = 'ByPropertyName'; Value = $true}
-                )   {                    
-                    Param($Property, $Value)
-                    $element.$Property | should -Be $Value
+                )   {
+                    Test-inElement @args
                 }
             }
         }
@@ -180,25 +161,17 @@ describe 'Get-sthPipelineParameter' {
                 $element = $result | Where-Object -FilterScript {$_.ParameterName -match 'ClassName' -and  $_.ParameterSet -match 'ClassNameComputerSet'}
 
                 it '<Property> property should be <Value>' -TestCases @(
-                    @{Property = 'Command'; Value = 'Get-CimInstance'},
+                    @{Property = 'Command'; Value = 'Get-CimInstance'}
                     @{Property = 'ParameterName'; Value = 'ClassName'}
-                )   {
-                    Param($Property, $Value)
-                    $element.$Property | should -Be $Value
-                }
-
-                it "'ParameterType' should be 'System.String'" {
-                    $element.ParameterType.FullName | Should -Be 'System.String'
-                }
-
-                it '<Property> property should be <Value>' -TestCases @(
-                    @{Property = 'ParameterSet'; Value = 'ClassNameComputerSet (IsDefault)'},    
-                    @{Property = 'Mandatory'; Value = $true},
-                    @{Property = 'ByValue'; Value = $false},
+                    @{Property = 'Aliases'; Value = $null}
+                    @{Property = 'AliasesString'; Value = ""}
+                    @{Property = 'ParameterType'; Value = "System.String"}
+                    @{Property = 'ParameterSet'; Value = 'ClassNameComputerSet (IsDefault)'}
+                    @{Property = 'Mandatory'; Value = $true}
+                    @{Property = 'ByValue'; Value = $false}
                     @{Property = 'ByPropertyName'; Value = $true}
-                )   {                    
-                    Param($Property, $Value)
-                    $element.$Property | should -Be $Value
+                )   {
+                    Test-inElement @args
                 }
             }
         }
@@ -262,25 +235,17 @@ describe 'Get-sthPipelineParameter' {
                 $element = $result | Where-Object -FilterScript {$_.ParameterName -match 'ClassName' -and  $_.ParameterSet -match 'ClassNameComputerSet'}
 
                 it '<Property> property should be <Value>' -TestCases @(
-                    @{Property = 'Command'; Value = 'Get-CimInstance'},
+                    @{Property = 'Command'; Value = 'Get-CimInstance'}
                     @{Property = 'ParameterName'; Value = 'ClassName'}
-                )   {
-                    Param($Property, $Value)
-                    $element.$Property | should -Be $Value
-                }
-
-                it "'ParameterType' should be 'System.String'" {
-                    $element.ParameterType.FullName | Should -Be 'System.String'
-                }
-
-                it '<Property> property should be <Value>' -TestCases @(
-                    @{Property = 'ParameterSet'; Value = 'ClassNameComputerSet (IsDefault)'},    
-                    @{Property = 'Mandatory'; Value = $true},
-                    @{Property = 'ByValue'; Value = $false},
+                    @{Property = 'Aliases'; Value = $null}
+                    @{Property = 'AliasesString'; Value = ""}
+                    @{Property = 'ParameterType'; Value = "System.String"}
+                    @{Property = 'ParameterSet'; Value = 'ClassNameComputerSet (IsDefault)'}
+                    @{Property = 'Mandatory'; Value = $true}
+                    @{Property = 'ByValue'; Value = $false}
                     @{Property = 'ByPropertyName'; Value = $true}
-                )   {                    
-                    Param($Property, $Value)
-                    $element.$Property | should -Be $Value
+                )   {
+                    Test-inElement @args
                 }
             }
         }
@@ -303,28 +268,45 @@ describe 'Get-sthPipelineParameter' {
                 $result[0].pstypenames[0] | should -Be 'sth.PipelineParameter'
             }
             
-            # it 'Command <Command> Parameter <ParameterName> ParameterSet <ParameterSet> should be: <Command>, <SupportsPipeline>' -TestCases @(
-            it 'Entry should exist: Command: <Command> Parameter: <ParameterName> ParameterType: <ParameterType> ParameterSet: <ParameterSet> Mandatory: <Mandatory> ByValue: <ByValue> ByPropertyName :<ByPropertyName>' -TestCases @(
-            @{Command = 'Get-CimInstance'; ParameterName = 'ClassName'; ParameterType = 'System.String'; ParameterSet = 'ClassNameComputerSet (IsDefault)'; Mandatory = $true; ByValue = $false; ByPropertyName = $true},
-            @{Command = 'Get-Verb'; ParameterName = 'verb'; ParameterType = 'System.String[]'; ParameterSet = '__AllParameterSets'; Mandatory = $false; ByValue = $true; ByPropertyName = $false},
-            @{Command = 'Get-Process'; ParameterName = 'Name'; ParameterType = 'System.String[]'; ParameterSet = 'Name (IsDefault)'; Mandatory = $false; ByValue = $false; ByPropertyName = $true},
-            @{Command = 'Get-PSDrive'; ParameterName = 'Name'; ParameterType = 'System.String[]'; ParameterSet = 'Name (IsDefault)'; Mandatory = $false; ByValue = $false; ByPropertyName = $true},
-            @{Command = 'Get-Service'; ParameterName = 'Name'; ParameterType = 'System.String[]'; ParameterSet = 'Default (IsDefault)'; Mandatory = $false; ByValue = $true; ByPropertyName = $true}
+            # it 'Command <Command> Parameter <ParameterName> Aliases <Aliases> AliasesCount <AliasesCount> AliasesString <AliasesString> ParameterSet <ParameterSet> should be: <Command>, <SupportsPipeline>' -TestCases @(
+            it 'Entry should exist: Command: <Command> Parameter: <ParameterName> Aliases: <Aliases> AliasesCount: <AliasesCount> AliasesString: <AliasesString> ParameterType: <ParameterType> ParameterSet: <ParameterSet> Mandatory: <Mandatory> ByValue: <ByValue> ByPropertyName :<ByPropertyName>' -TestCases @(
+            @{Command = 'Get-CimInstance'; ParameterName = 'ClassName'; Aliases = $null; AliasesCount = 0; AliasesString = ""; ParameterType = 'System.String'; ParameterSet = 'ClassNameComputerSet (IsDefault)'; Mandatory = $true; ByValue = $false; ByPropertyName = $true},
+            @{Command = 'Get-Verb'; ParameterName = 'verb'; Aliases = $null; AliasesCount = 0; AliasesString = ""; ParameterType = 'System.String[]'; ParameterSet = '__AllParameterSets'; Mandatory = $false; ByValue = $true; ByPropertyName = $false},
+            @{Command = 'Get-Process'; ParameterName = 'Name'; Aliases = 'ProcessName'; AliasesCount = 1; AliasesString = 'ProcessName'; ParameterType = 'System.String[]'; ParameterSet = 'Name (IsDefault)'; Mandatory = $false; ByValue = $false; ByPropertyName = $true},
+            @{Command = 'Get-PSDrive'; ParameterName = 'Name'; Aliases = $null; AliasesCount = 0; AliasesString = ""; ParameterType = 'System.String[]'; ParameterSet = 'Name (IsDefault)'; Mandatory = $false; ByValue = $false; ByPropertyName = $true},
+            @{Command = 'Get-Service'; ParameterName = 'Name'; Aliases = 'ServiceName'; AliasesCount = 1; AliasesString = 'ServiceName'; ParameterType = 'System.String[]'; ParameterSet = 'Default (IsDefault)'; Mandatory = $false; ByValue = $true; ByPropertyName = $true}
             )   {
-                    Param($Command,$ParameterName,$ParameterType,$ParameterSet,$Mandatory,$ByValue,$ByPropertyName)
-                    $element = $result | Where-Object -FilterScript {$_.Command -eq $Command -and $_.ParameterName -eq $ParameterName -and  $_.ParameterSet -eq $ParameterSet}
-                    
-                    $element.Command | should -Be $Command
-                    $element.ParameterName | should -Be $ParameterName
-                    $element.ParameterType.FullName | should -Be $ParameterType
-                    $element.ParameterSet | should -Be $ParameterSet
-                    $element.Mandatory | should -Be $Mandatory
-                    $element.ByValue | should -Be $ByValue
-                    $element.ByPropertyName | should -Be $ByPropertyName
-                }
+                Param($Command,$ParameterName,$Aliases,$AliasesCount,$AliasesString,$ParameterType,$ParameterSet,$Mandatory,$ByValue,$ByPropertyName)
+                $element = $result | Where-Object -FilterScript {$_.Command -eq $Command -and $_.ParameterName -eq $ParameterName -and  $_.ParameterSet -eq $ParameterSet}
+                
+                $element.Command | should -Be $Command
+                $element.ParameterName | should -Be $ParameterName
+                $element.Aliases | Should -Contain $Aliases
+                $element.Aliases.Count | Should -Be $AliasesCount
+                $element.AliasesString | Should -Be $AliasesString
+                $element.ParameterType.FullName | should -Be $ParameterType
+                $element.ParameterSet | should -Be $ParameterSet
+                $element.Mandatory | should -Be $Mandatory
+                $element.ByValue | should -Be $ByValue
+                $element.ByPropertyName | should -Be $ByPropertyName
             }
         }
+    }
             
+    context 'Testing Aliases' {
+        $result = Get-sthPipelineParameter -Command Restart-Computer
+
+        it 'Testing Aliases property' {
+            $result.Aliases | Should -Be 'CN', '__SERVER', 'Server', 'IPAddress'
+            $result.Aliases | Should -HaveCount 4
+        }
+
+        it 'Testing AliasesString property' {
+            $result.AliasesString | Should -Be 'CN, __SERVER, Server, IPAddress'
+            $result.AliasesString | Should -BeOfType [System.String]
+        }
+    }
+
     context 'Invoking function without parameters' {
         
         $result = Get-sthPipelineParameter
