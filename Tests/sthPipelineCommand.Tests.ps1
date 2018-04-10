@@ -1,5 +1,4 @@
 Remove-Module -Name sthPipelineTools -Force -ErrorAction 'SilentlyContinue'
-# . "$PSScriptRoot\..\sthPipelineCommand.ps1"
 Import-Module "$PSScriptRoot\..\sthPipelineTools.psd1"
 
 describe 'Get-sthPipelineCommand' {
