@@ -41,7 +41,7 @@ function Get-sthPipelineCommand
                 $cmd = $cmd.ReferencedCommand
             }
             
-            $hash = @{
+            $hash = [ordered]@{
                 Command = $cmd.Name
             }
             
